@@ -8180,14 +8180,34 @@ textarea.form-control-lg {
   background-color: rgba(var(--bs-white-rgb), var(--bs-bg-opacity)) !important;
 }
 
-.bg-black-pic {
+
+.bg-orange-pic {
   padding-top: 10rem;
   padding-bottom: calc(10rem - 4.5rem);
-  background: url("../assets/img/black_bg.png");
-  background-position: right 50% top 10%;;
+  background: url("../assets/img/orange-gradient.jpg");
+  background-position: right 50% top 20%;;
   background-repeat: no-repeat;
   background-attachment: scroll;
-  background-size: cover;   
+  background-size: cover;
+}
+.bg-orange-pic2 {
+  padding-top: 10rem;
+  padding-bottom: calc(10rem - 4.5rem);
+  background: url("../assets/img/orange-gradient.jpg");
+  background-position: right 50% top 50%;;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
+.bg-white-pic {
+  padding-top: 10rem;
+  padding-bottom: calc(10rem - 4.5rem);
+  background: url("../assets/img/red_gradient.jpeg");
+  background-position: right 50% top 100%;;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
 }
 .bg-body {
   --bs-bg-opacity: 1;
@@ -10852,6 +10872,9 @@ body {
 .page-section {
   padding: 4rem 0;
 }
+.divider-padding{
+  padding-bottom: 60%;
+}
 
 .text-white-75 {
   color: rgba(255, 255, 255, 0.75) !important;
@@ -11049,7 +11072,7 @@ header.masthead h1, header.masthead .h1 {
 #resume .timeline-block {
   position: relative;
   padding-top: 1.5rem;
-  padding-bottom: 1rem;
+  padding-bottom: 1rem; 
 }
 #resume .timeline-ico{
   position: absolute;
@@ -11156,3 +11179,5 @@ header.masthead h1, header.masthead .h1 {
 .spacer {
   padding: 2rem;
 }
+
+.
