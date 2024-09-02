@@ -8204,10 +8204,7 @@ textarea.form-control-lg {
   padding-top: 10rem;
   padding-bottom: calc(10rem - 4.5rem);
   background: url("../assets/img/red_gradient.jpeg");
-  background-position: right 50% top 100%;;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-size: cover;
+  background-position: right 50% top 50%;;
 }
 .bg-body {
   --bs-bg-opacity: 1;
@@ -11180,4 +11177,6 @@ header.masthead h1, header.masthead .h1 {
   padding: 2rem;
 }
 
-.
+.shift_right {
+  float: right;
+}
