@@ -1,0 +1,75 @@
+/* Nippo */
+@font-face {
+    font-family: 'Nippo';
+    src: url('//cdn.fontshare.com/wf/XGP6NMZ4FQQXBWAQUYQLCNIWM3MY32VM/HWS3BEDZGCEJ7OTN77GWTGBZRQI53P5W/DJGEYSEA5LYCU2M3EMH3M7L4NOZIF7NQ.woff2') format('woff2'),
+         url('//cdn.fontshare.com/wf/XGP6NMZ4FQQXBWAQUYQLCNIWM3MY32VM/HWS3BEDZGCEJ7OTN77GWTGBZRQI53P5W/DJGEYSEA5LYCU2M3EMH3M7L4NOZIF7NQ.woff') format('woff'),
+         url('//cdn.fontshare.com/wf/XGP6NMZ4FQQXBWAQUYQLCNIWM3MY32VM/HWS3BEDZGCEJ7OTN77GWTGBZRQI53P5W/DJGEYSEA5LYCU2M3EMH3M7L4NOZIF7NQ.ttf') format('truetype');
+    font-weight: 200;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Nippo';
+    src: url('//cdn.fontshare.com/wf/UIZQHPRKXWFXXXNCCWAQNPLPYSCZOTGR/L3A56DFAZJEBMFQGUTKRNXGTR6FBT3BU/TC2ABW4Q4UZXRZEJEMO3VSP6VV2XQXQO.woff2') format('woff2'),
+         url('//cdn.fontshare.com/wf/UIZQHPRKXWFXXXNCCWAQNPLPYSCZOTGR/L3A56DFAZJEBMFQGUTKRNXGTR6FBT3BU/TC2ABW4Q4UZXRZEJEMO3VSP6VV2XQXQO.woff') format('woff'),
+         url('//cdn.fontshare.com/wf/UIZQHPRKXWFXXXNCCWAQNPLPYSCZOTGR/L3A56DFAZJEBMFQGUTKRNXGTR6FBT3BU/TC2ABW4Q4UZXRZEJEMO3VSP6VV2XQXQO.ttf') format('truetype');
+    font-weight: 300;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Nippo';
+    src: url('//cdn.fontshare.com/wf/U7JSLDUPOD4CH2AU5H6SM6CTOVK6PG6Z/SNDLV7SPHQN4WOXGU7TVOIAJHZT4EK44/VRZUBY2RFQGFI5FK7Z6TUCJRE5WBEFEN.woff2') format('woff2'),
+         url('//cdn.fontshare.com/wf/U7JSLDUPOD4CH2AU5H6SM6CTOVK6PG6Z/SNDLV7SPHQN4WOXGU7TVOIAJHZT4EK44/VRZUBY2RFQGFI5FK7Z6TUCJRE5WBEFEN.woff') format('woff'),
+         url('//cdn.fontshare.com/wf/U7JSLDUPOD4CH2AU5H6SM6CTOVK6PG6Z/SNDLV7SPHQN4WOXGU7TVOIAJHZT4EK44/VRZUBY2RFQGFI5FK7Z6TUCJRE5WBEFEN.ttf') format('truetype');
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Nippo';
+    src: url('//cdn.fontshare.com/wf/CDTACYC4IPPNPYZXG4P4UHS7QK72WJY6/64YLI2LOSKHSMW7BAB55H3OT6QONCPIY/A33XXN3HW5OI7KZNTLP322IHAOQINDEQ.woff2') format('woff2'),
+         url('//cdn.fontshare.com/wf/CDTACYC4IPPNPYZXG4P4UHS7QK72WJY6/64YLI2LOSKHSMW7BAB55H3OT6QONCPIY/A33XXN3HW5OI7KZNTLP322IHAOQINDEQ.woff') format('woff'),
+         url('//cdn.fontshare.com/wf/CDTACYC4IPPNPYZXG4P4UHS7QK72WJY6/64YLI2LOSKHSMW7BAB55H3OT6QONCPIY/A33XXN3HW5OI7KZNTLP322IHAOQINDEQ.ttf') format('truetype');
+    font-weight: 500;
+    font-display: swap;
+    font-style: normal;
+  }
+  
+  /* Azeret Mono */
+  @font-face {
+    font-family: 'Azeret Mono';
+    src: url('//cdn.fontshare.com/wf/FHIBOHNB3RQ4WIX6IE6WVD4SZ37KX3WH/SBAJEV2A5D6JUJH36OVDTG6PZGRBGKOU/KNN3OUEPICGHVNRGAMHBVU63SKBDKVUA.woff2') format('woff2'),
+         url('//cdn.fontshare.com/wf/FHIBOHNB3RQ4WIX6IE6WVD4SZ37KX3WH/SBAJEV2A5D6JUJH36OVDTG6PZGRBGKOU/KNN3OUEPICGHVNRGAMHBVU63SKBDKVUA.woff') format('woff'),
+         url('//cdn.fontshare.com/wf/FHIBOHNB3RQ4WIX6IE6WVD4SZ37KX3WH/SBAJEV2A5D6JUJH36OVDTG6PZGRBGKOU/KNN3OUEPICGHVNRGAMHBVU63SKBDKVUA.ttf') format('truetype');
+    font-weight: 100;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Azeret Mono';
+    src: url('//cdn.fontshare.com/wf/GHIDVJJ2CHY6WZ3362RREGXZBO7NOOMK/LZK7IKMFMQHIMTCDFXV2YO6IQEPXEH4I/2ZJ36FLIOWJLEOATPDW7JDZXGNLEXPDV.woff2') format('woff2'),
+         url('//cdn.fontshare.com/wf/GHIDVJJ2CHY6WZ3362RREGXZBO7NOOMK/LZK7IKMFMQHIMTCDFXV2YO6IQEPXEH4I/2ZJ36FLIOWJLEOATPDW7JDZXGNLEXPDV.woff') format('woff'),
+         url('//cdn.fontshare.com/wf/GHIDVJJ2CHY6WZ3362RREGXZBO7NOOMK/LZK7IKMFMQHIMTCDFXV2YO6IQEPXEH4I/2ZJ36FLIOWJLEOATPDW7JDZXGNLEXPDV.ttf') format('truetype');
+    font-weight: 200;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Azeret Mono';
+    src: url('//cdn.fontshare.com/wf/A4TPQWZUN7QKF3WJNLPU372OM66XZMPU/IYI6FKOPT2HFSNXTQC33Z6FVOTQI2D4L/WO3MD7I45GNCLBXMRDXL2DMZNWCSZR63.woff2') format('woff2'),
+         url('//cdn.fontshare.com/wf/A4TPQWZUN7QKF3WJNLPU372OM66XZMPU/IYI6FKOPT2HFSNXTQC33Z6FVOTQI2D4L/WO3MD7I45GNCLBXMRDXL2DMZNWCSZR63.woff') format('woff'),
+         url('//cdn.fontshare.com/wf/A4TPQWZUN7QKF3WJNLPU372OM66XZMPU/IYI6FKOPT2HFSNXTQC33Z6FVOTQI2D4L/WO3MD7I45GNCLBXMRDXL2DMZNWCSZR63.ttf') format('truetype');
+    font-weight: 300;
+    font-display: swap;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Azeret Mono';
+    src: url('//cdn.fontshare.com/wf/ANLMHTNB6D2O5I43CFASACQGGIK5JLDZ/IGISU5CKQGLCD252CUY5AVZQ4UQRDFWC/BUAFC2XP3YCVWDC5LF3GWTKRIOZXURVB.woff2') format('woff2'),
+         url('//cdn.fontshare.com/wf/ANLMHTNB6D2O5I43CFASACQGGIK5JLDZ/IGISU5CKQGLCD252CUY5AVZQ4UQRDFWC/BUAFC2XP3YCVWDC5LF3GWTKRIOZXURVB.woff') format('woff'),
+         url('//cdn.fontshare.com/wf/ANLMHTNB6D2O5I43CFASACQGGIK5JLDZ/IGISU5CKQGLCD252CUY5AVZQ4UQRDFWC/BUAFC2XP3YCVWDC5LF3GWTKRIOZXURVB.ttf') format('truetype');
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+  }

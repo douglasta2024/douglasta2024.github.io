@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOUGLAS TA — INDUSTRIAL PORTFOLIO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <style>
+        @import url('https://api.fontshare.com/v2/css?f[]=nippo@200,300,400,500,600&f[]=azeret-mono@100,200,300,400&display=swap');
+
+        :root {
+            --bg-color: #ffffff;
+            --accent-color: #000000;
+            --grid-line: rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Nippo', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--accent-color);
+            overflow: hidden;
+            cursor: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .mono-text {
+            font-family: 'Azeret Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .grid-bg {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, var(--grid-line) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+        }
+
+        .image-container:hover .human-image {
+            opacity: 0;
+        }
+
+        .image-container:hover .tech-image {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        #custom-cursor {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            background: black;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease-out, width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+            transform: translate(-50%, -50%);
+            left: -100px;
+            top: -100px;
+            visibility: visible;
+            display: block;
+        }
+
+        .is-hovering #custom-cursor {
+            width: 80px;
+            height: 80px;
+            background: white;
+            mix-blend-mode: difference;
+        }
+
+        .brutalist-border {
+            border: 1px solid black;
+        }
+
+        .vertical-text {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .scanline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(0,0,0,0.1);
+            z-index: 10;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+
+        .edge-label {
+            font-size: 10px;
+            color: #666;
+        }
+
+        .content-area {
+            height: calc(100vh - 120px);
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen flex flex-col relative select-none grid-bg">
+        <div id="custom-cursor"></div>
+        <div class="scanline"></div>
+
+        <!-- Header -->
+        <header class="border-b border-black py-6 px-8 flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-tight">DOUGLAS TA</h1>
+            <nav class="flex gap-8 mono-text text-sm">
+                <a href="#works">WORKS</a>
+                <a href="#lab">LAB</a>
+                <a href="#info">INFO</a>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 grid grid-cols-12 relative overflow-hidden content-area">
+            <!-- Left Sidebar -->
+            <div class="col-span-1 border-r border-black flex flex-col items-center justify-center gap-6 py-8">
+                <a href="#twitter" class="text-2xl transition-transform hover:scale-125">
+                    <iconify-icon icon="mdi:twitter"></iconify-icon>
+                </a>
+                <a href="#github" class="text-2xl transition-transform hover:scale-125">
+                    <iconify-icon icon="mdi:github"></iconify-icon>
+                </a>
+                <a href="#linkedin" class="text-2xl transition-transform hover:scale-125">
+                    <iconify-icon icon="mdi:linkedin"></iconify-icon>
+                </a>
+                <a href="#instagram" class="text-2xl transition-transform hover:scale-125">
+                    <iconify-icon icon="mdi:instagram"></iconify-icon>
+                </a>
+                <a href="#youtube" class="text-2xl transition-transform hover:scale-125">
+                    <iconify-icon icon="mdi:youtube"></iconify-icon>
+                </a>
+            </div>
+
+            <!-- Center Portrait Area -->
+            <div class="col-span-10 flex flex-col items-center justify-center p-4 relative">
+                <div class="absolute top-10 left-10 pointer-events-none z-30">
+                    <div>
+                        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[0.8] text-black">DOUGLAS<br>TA</h1>
+                        <div class="flex items-center gap-2 mt-4">
+                            <div class="w-12 h-[1px] bg-black"></div>
+                            <span class="mono-text text-[10px] font-bold">MULTIDISCIPLINARY CREATIVE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute top-10 right-10 mono-text text-[10px] text-right hidden md:block pointer-events-none z-30">
+                    <div class="font-bold">ID_0091_X // CORE_SYSTEM</div>
+                    <div class="opacity-40">AUTHORIZATION_LEVEL_01</div>
+                    <div class="opacity-40 mt-1">2024_PORTFOLIO_V1</div>
+                </div>
+
+                <!-- Portrait Image -->
+                <div class="image-container relative h-[65vh] aspect-[4/5] bg-neutral-100 border-[16px] border-black transition-all duration-700 hover:shadow-[30px_30px_0px_rgba(0,0,0,0.1)] group z-20">
+                    <div class="absolute -top-10 left-0 mono-text text-[10px] flex items-center gap-2">
+                        <span class="px-2 py-0.5 bg-black text-white">ID_404</span>
+                        <span>ENTITY_SCAN_COMPLETE</span>
+                    </div>
+
+                    <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/5531bca8-cac6-471d-98bf-a1027e7a1683/1772633847243-9bbf028e/image_one.png" 
+                         class="human-image absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 grayscale" 
+                         alt="Douglas Ta Portrait">
+                    
+                    <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/5531bca8-cac6-471d-98bf-a1027e7a1683/1772633847243-9bbf028e/image_one.png" 
+                         class="tech-image absolute inset-0 w-full h-full object-cover object-center opacity-0 transition-all duration-700 scale-110 grayscale-0" 
+                         alt="Technical Variant">
+
+                    <!-- Corner Brackets -->
+                    <div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-white mix-blend-difference"></div>
+                    <div class="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-white mix-blend-difference"></div>
+                    <div class="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-white mix-blend-difference"></div>
+                    <div class="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-white mix-blend-difference"></div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="col-span-1 border-l border-black flex flex-col items-center justify-center py-8">
+                <div id="time-display" class="mono-text text-[14px] font-bold">00:00:00</div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="border-t border-black py-4 px-8 bg-white">
+            <div class="flex items-center gap-4">
+                <span class="mono-text text-[10px]">// PORTFOLIO_SYSTEM_ACTIVE</span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const cursor = document.getElementById('custom-cursor');
+        const body = document.body;
+
+        // Track cursor position
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+        });
+
+        // Setup hover effects
+        const hoverSelectors = 'a, button, .image-container, [role="button"]';
+        const setupHovers = () => {
+            const hoverables = document.querySelectorAll(hoverSelectors);
+            hoverables.forEach(el => {
+                el.removeEventListener('mouseenter', handleEnter);
+                el.removeEventListener('mouseleave', handleLeave);
+                el.addEventListener('mouseenter', handleEnter);
+                el.addEventListener('mouseleave', handleLeave);
+            });
+        };
+
+        const handleEnter = () => body.classList.add('is-hovering');
+        const handleLeave = () => body.classList.remove('is-hovering');
+
+        setupHovers();
+        const observer = new MutationObserver(() => setupHovers());
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        // Update time display
+        function updateTime() {
+            const timeEl = document.getElementById('time-display');
+            if (!timeEl) return;
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ':' + 
+                            now.getMinutes().toString().padStart(2, '0') + ':' + 
+                            now.getSeconds().toString().padStart(2, '0');
+            timeEl.innerText = timeStr;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Parallax effect on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const techImg = document.querySelector('.tech-image');
+            if (techImg) {
+                const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                const y = (e.clientY / window.innerHeight - 0.5) * 20;
+                techImg.style.transform = `scale(1.1) translate(${x}px, ${y}px)`;
+            }
+        });
+    </script>
+</body>
+</html>

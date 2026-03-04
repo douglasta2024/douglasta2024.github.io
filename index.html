@@ -1,0 +1,115 @@
+Page: Douglas Ta — Refined Brutalist Landing
+
+```html
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>DOUGLAS TA — INDUSTRIAL PORTFOLIO</title><script src="https://cdn.tailwindcss.com"></script><script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script><style>@import url('https://api.fontshare.com/v2/css?f[]=nippo@200,300,400,500,600&f[]=azeret-mono@100,200,300,400&display=swap');:root{--bg-color:#ffffff;--accent-color:#000000;--grid-line:rgba(0,0,0,0.1);}body{font-family:'Nippo',sans-serif;background-color:var(--bg-color);color:var(--accent-color);overflow:hidden;cursor:none;margin:0;padding:0;}.mono-text{font-family:'Azeret Mono',monospace;text-transform:uppercase;letter-spacing:0.2em;}.grid-bg{background-size:40px 40px;background-image:linear-gradient(to right,var(--grid-line) 1px,transparent 1px),linear-gradient(to bottom,var(--grid-line) 1px,transparent 1px);}.image-container:hover .human-image{opacity:0;}.image-container:hover .tech-image{opacity:1;transform:scale(1.05);}#custom-cursor{position:fixed;width:40px;height:40px;background:black;border-radius:50%;pointer-events:none;z-index:9999;transition:transform 0.1s ease-out,width 0.3s ease,height 0.3s ease,background-color 0.3s ease;transform:translate(-50%,-50%);left: -100px;top: -100px;visibility:visible;display:block;}.is-hovering #custom-cursor{width:80px;height:80px;background:white;mix-blend-mode:difference;}.brutalist-border{border:1px solid black;}.vertical-text{writing-mode:vertical-rl;transform:rotate(180deg);}@keyframes scanline{0%{transform:translateY(-100%);}100%{transform:translateY(100%);}}.scanline{position:absolute;top:0;left:0;width:100%;height:2px;background:rgba(0,0,0,0.1);z-index:10;pointer-events:none;animation:scanline 8s linear infinite;}.edge-label{font-size:10px;color:#666;}.content-area{height:calc(100vh - 120px);}</style>  <style>sd-component { display: block; }</style>
+  <script src="https://cdn.jsdelivr.net/npm/petite-vue@0.4.1/dist/petite-vue.iife.js" defer init></script>
+</head><body><div class="min-h-screen flex flex-col relative select-none grid-bg"><div id="custom-cursor"></div><div class="scanline"></div><!-- component: BrutalistHeader (64b147f5-94d9-4a1b-adac-f157d10ba74d) -->
+<div v-scope="{ ...{&quot;activeItem&quot;:&quot;home&quot;,&quot;worksHref&quot;:&quot;#works&quot;,&quot;labHref&quot;:&quot;#lab&quot;,&quot;infoHref&quot;:&quot;#info&quot;,&quot;isSystemActive&quot;:true}, $emit() {} }">
+<header class="w-full flex items-center justify-between p-2 border border-black z-40 bg-white">
+    <div class="flex items-center gap-6">
+        <span class="uppercase tracking-[0.2em] text-xs font-bold" style="font-family: 'Azeret Mono', monospace;">DT_SYSTEM_V.01</span>
+        <span class="uppercase tracking-[0.2em] text-xs opacity-40" style="font-family: 'Azeret Mono', monospace;">[PORTFOLIO_CORE]</span>
+    </div>
+    <nav class="hidden md:flex items-center gap-12">
+        <a :href="worksHref" 
+           class="uppercase tracking-[0.2em] text-xs hover:line-through transition-all" 
+           :class="{ 'line-through': activeItem === 'works' }" 
+           style="font-family: 'Azeret Mono', monospace;">WORKS</a>
+        <a :href="labHref" 
+           class="uppercase tracking-[0.2em] text-xs hover:line-through transition-all" 
+           :class="{ 'line-through': activeItem === 'lab' }" 
+           style="font-family: 'Azeret Mono', monospace;">LAB</a>
+        <a :href="infoHref" 
+           class="uppercase tracking-[0.2em] text-xs hover:line-through transition-all" 
+           :class="{ 'line-through': activeItem === 'info' }" 
+           style="font-family: 'Azeret Mono', monospace;">INFO</a>
+    </nav>
+    <div class="flex items-center gap-4">
+        <button @click="$emit('statusClick')" 
+                class="w-3 h-3 rounded-full transition-colors" 
+                :class="isSystemActive ? 'bg-black animate-pulse' : 'bg-red-500'"></button>
+        <span class="uppercase tracking-[0.2em] text-xs" 
+              style="font-family: 'Azeret Mono', monospace;" 
+              v-if="isSystemActive">SYSTEM ACTIVE</span>
+        <span class="uppercase tracking-[0.2em] text-xs" 
+              style="font-family: 'Azeret Mono', monospace;" 
+              v-else>SYSTEM OFFLINE</span>
+    </div>
+</header>
+</div>
+<!-- /component: BrutalistHeader (64b147f5-94d9-4a1b-adac-f157d10ba74d) --><main class="flex-1 grid grid-cols-12 relative overflow-hidden content-area"><!-- component: SidebarLeft (7c9474ad-2478-45a7-adee-5a73bc7ac236) -->
+<div v-scope="{ ...{&quot;twitterHref&quot;:&quot;#twitter&quot;,&quot;githubHref&quot;:&quot;#github&quot;,&quot;linkedinHref&quot;:&quot;#linkedin&quot;,&quot;instagramHref&quot;:&quot;#instagram&quot;,&quot;youtubeHref&quot;:&quot;#youtube&quot;}, $emit() {} }">
+<div class="col-span-1 border-r border-black flex flex-col justify-between items-center py-12 h-full relative bg-white/50 backdrop-blur-sm z-30">
+    <div class="flex items-center justify-center" style="writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Azeret Mono', monospace; text-transform: uppercase; letter-spacing: 0.2em; font-size: 11px; font-weight: 600; color: #333;">
+        COORDINATES_0.0.1
+    </div>
+    <div class="flex flex-col gap-8 items-center">
+        <a :href="twitterHref" class="hover:scale-125 transition-transform"><iconify-icon icon="lucide:twitter" class="text-3xl"></iconify-icon></a>
+        <a :href="githubHref" class="hover:scale-125 transition-transform"><iconify-icon icon="lucide:github" class="text-3xl"></iconify-icon></a>
+        <a :href="linkedinHref" class="hover:scale-125 transition-transform"><iconify-icon icon="lucide:linkedin" class="text-3xl"></iconify-icon></a>
+        <a :href="instagramHref" class="hover:scale-125 transition-transform"><iconify-icon icon="lucide:instagram" class="text-3xl"></iconify-icon></a>
+        <a :href="youtubeHref" class="hover:scale-125 transition-transform"><iconify-icon icon="lucide:youtube" class="text-3xl"></iconify-icon></a>
+    </div>
+    <div class="flex items-center justify-center" style="writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Azeret Mono', monospace; text-transform: uppercase; letter-spacing: 0.2em; font-size: 11px; font-weight: 600; color: #333;">
+        REF_772632989
+    </div>
+</div>
+</div>
+<!-- /component: SidebarLeft (7c9474ad-2478-45a7-adee-5a73bc7ac236) --><div class="col-span-10 flex flex-col items-center justify-center p-4 relative"><div class="absolute top-10 left-10 pointer-events-none z-30"><div><h1 class="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[0.8] text-black">DOUGLAS<br>TA</h1><div class="flex items-center gap-2 mt-4"><div class="w-12 h-[1px] bg-black"></div><span class="mono-text text-[10px] font-bold">MULTIDISCIPLINARY CREATIVE</span></div></div></div><div class="absolute top-10 right-10 mono-text text-[10px] text-right hidden md:block pointer-events-none z-30"><div class="font-bold">ID_0091_X // CORE_SYSTEM</div><div class="opacity-40">AUTHORIZATION_LEVEL_01</div><div class="opacity-40 mt-1">2024_PORTFOLIO_V1</div></div><div class="image-container relative h-[65vh] aspect-[4/5] bg-neutral-100 border-[16px] border-black transition-all duration-700 hover:shadow-[30px_30px_0px_rgba(0,0,0,0.1)] group z-20"><div class="absolute -top-10 left-0 mono-text text-[10px] flex items-center gap-2"><span class="px-2 py-0.5 bg-black text-white">ID_404</span><span>ENTITY_SCAN_COMPLETE</span></div><img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/5531bca8-cac6-471d-98bf-a1027e7a1683/1772633847243-9bbf028e/image_one.png" class="human-image absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 grayscale" alt="Douglas Ta Portrait"><img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/5531bca8-cac6-471d-98bf-a1027e7a1683/1772633847243-9bbf028e/image_one.png" class="tech-image absolute inset-0 w-full h-full object-cover object-center opacity-0 transition-all duration-700 scale-110 grayscale-0" alt="Technical Variant"><div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-white mix-blend-difference"></div><div class="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-white mix-blend-difference"></div><div class="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-white mix-blend-difference"></div><div class="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-white mix-blend-difference"></div></div></div><!-- component: SidebarRight (d26e2119-add7-4a7c-a504-6877a63c4230) -->
+<div v-scope="{ ...{&quot;currentTime&quot;:&quot;00:00:00&quot;}, $emit() {} }">
+<div class="col-span-1 border-l border-black flex flex-col justify-between items-center py-4 relative bg-white/50 backdrop-blur-sm z-30 h-full">
+    <div class="text-[10px] text-[#666] font-mono uppercase tracking-[0.2em]" style="writing-mode: vertical-rl; transform: rotate(180deg);">
+        LOG_4502_TIMESTAMP
+    </div>
+    <div class="flex flex-col items-center gap-12">
+        <div class="w-[1px] h-32 bg-black opacity-30"></div>
+        <div class="w-10 h-10 border border-black flex items-center justify-center" style="animation: spin 10s linear infinite;">
+            <iconify-icon icon="lucide:settings" class="text-lg"></iconify-icon>
+        </div>
+        <div class="w-[1px] h-32 bg-black opacity-30"></div>
+    </div>
+    <div class="font-mono uppercase tracking-[0.2em] text-[10px]" style="writing-mode: vertical-rl; transform: rotate(180deg);">
+        {{ currentTime }}
+    </div>
+</div>
+</div>
+<!-- /component: SidebarRight (d26e2119-add7-4a7c-a504-6877a63c4230) --></main><!-- component: BrutalistFooter (1ebd2821-49e4-4e48-997b-32a16915b1fa) -->
+<div v-scope="{ ...{&quot;showScrollIndicator&quot;:true}, $emit() {} }">
+<footer class="w-full flex items-center justify-between p-2 border border-black z-40 bg-white">
+    <style>
+        @keyframes marquee-footer {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+    <div class="flex gap-12 overflow-hidden whitespace-nowrap group">
+        <div class="flex gap-12 uppercase text-[10px] opacity-40" 
+             style="font-family: 'Azeret Mono', monospace; letter-spacing: 0.2em; animation: marquee-footer 20s linear infinite;">
+            <span>DESIGNING FOR THE VOID // 2024 EDITION</span>
+            <span>●</span>
+            <span>INDUSTRIAL BRUTALISM // CORE_ARCH</span>
+            <span>●</span>
+            <span>MINIMALISM IS SURVIVAL // RA_V_9</span>
+            <span>●</span>
+            <span>DESIGNING FOR THE VOID // 2024 EDITION</span>
+            <!-- Duplicated for seamless loop -->
+            <span>DESIGNING FOR THE VOID // 2024 EDITION</span>
+            <span>●</span>
+            <span>INDUSTRIAL BRUTALISM // CORE_ARCH</span>
+            <span>●</span>
+            <span>MINIMALISM IS SURVIVAL // RA_V_9</span>
+            <span>●</span>
+            <span>DESIGNING FOR THE VOID // 2024 EDITION</span>
+        </div>
+    </div>
+    <div v-if="showScrollIndicator" class="flex items-center gap-4 border-l border-black pl-8 ml-8">
+        <span class="uppercase text-xs whitespace-nowrap" 
+              style="font-family: 'Azeret Mono', monospace; letter-spacing: 0.2em;">[ SCROLL TO EXPLORE ]</span>
+        <iconify-icon icon="lucide:chevron-down" class="animate-bounce"></iconify-icon>
+    </div>
+</footer>
+</div>
+<!-- /component: BrutalistFooter (1ebd2821-49e4-4e48-997b-32a16915b1fa) --></div><script>const cursor = document.getElementById('custom-cursor');const body = document.body;document.addEventListener('mousemove', (e) => {cursor.style.left = `${e.clientX}px`;cursor.style.top = `${e.clientY}px`;});const hoverSelectors = 'a, button, .image-container, [role="button"]';const setupHovers = () => {const hoverables = document.querySelectorAll(hoverSelectors);hoverables.forEach(el => {el.removeEventListener('mouseenter', handleEnter);el.removeEventListener('mouseleave', handleLeave);el.addEventListener('mouseenter', handleEnter);el.addEventListener('mouseleave', handleLeave);});};const handleEnter = () => body.classList.add('is-hovering');const handleLeave = () => body.classList.remove('is-hovering');setupHovers();const observer = new MutationObserver(() => setupHovers());observer.observe(document.body, { childList: true, subtree: true });function updateTime() {const timeEl = document.getElementById('time-display');if (!timeEl) return;const now = new Date();const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0') + ':' + now.getSeconds().toString().padStart(2, '0');timeEl.innerText = timeStr;}setInterval(updateTime, 1000);updateTime();document.addEventListener('mousemove', (e) => {const techImg = document.querySelector('.tech-image');if (techImg) {const x = (e.clientX / window.innerWidth - 0.5) * 20;const y = (e.clientY / window.innerHeight - 0.5) * 20;techImg.style.transform = `scale(1.1) translate(${x}px, ${y}px)`;}});</script></body></html>
+```
+
+Please reference this design and implement it into our codebase; Try to understand the structure, which part of our codebase is relevant and implement

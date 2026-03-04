@@ -1,0 +1,405 @@
+Page: Who Am I — Douglas Ta
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHO AM I — DOUGLAS TA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <style>
+        @import url('https://api.fontshare.com/v2/css?f[]=nippo@200,300,400,500,600&f[]=azeret-mono@100,200,300,400&display=swap');
+
+        :root {
+            --bg-color: #ffffff;
+            --accent-color: #000000;
+            --grid-line: rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Nippo', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--accent-color);
+            margin: 0;
+            padding: 0;
+            cursor: none;
+        }
+
+        .mono-text {
+            font-family: 'Azeret Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .grid-bg {
+            background-size: 40px 40px;
+            background-image:
+                linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+        }
+
+        #custom-cursor {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            background: black;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease-out, width 0.3s ease, height 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .is-hovering #custom-cursor {
+            width: 80px;
+            height: 80px;
+            background: white;
+        }
+
+        .brutalist-border {
+            border: 1px solid black;
+        }
+
+        .vertical-text {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .scanline {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: rgba(0,0,0,0.1);
+            z-index: 100;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+        .scroll-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 10s linear infinite;
+        }
+    </style>
+  <style>sd-component { display: block; }</style>
+  <script src="https://cdn.jsdelivr.net/npm/petite-vue@0.4.1/dist/petite-vue.iife.js" defer init></script>
+</head>
+<body>
+    <div class="min-h-screen flex flex-col relative select-none grid-bg">
+        <!-- Custom Cursor -->
+        <div id="custom-cursor"></div>
+        <div class="scanline"></div>
+
+        <!-- Header Area -->
+        <!-- component: BrutalistHeader (64b147f5-94d9-4a1b-adac-f157d10ba74d) -->
+<div v-scope="{ ...{&quot;activeItem&quot;:&quot;info&quot;,&quot;worksHref&quot;:&quot;#works&quot;,&quot;labHref&quot;:&quot;#lab&quot;,&quot;infoHref&quot;:&quot;https://draft-01599a58-2164-43e3-ba5b-2ded5efe1390.preview.superdesign.dev&quot;,&quot;isSystemActive&quot;:true}, $emit() {} }">
+<header class="w-full flex items-center justify-between p-2 border border-black z-40 bg-white">
+    <div class="flex items-center gap-6">
+        <span class="uppercase tracking-[0.2em] text-xs font-bold" style="font-family: 'Azeret Mono', monospace;">DT_SYSTEM_V.01</span>
+        <span class="uppercase tracking-[0.2em] text-xs opacity-40" style="font-family: 'Azeret Mono', monospace;">[PORTFOLIO_CORE]</span>
+    </div>
+    <nav class="hidden md:flex items-center gap-12">
+        <a :href="worksHref" 
+           class="uppercase tracking-[0.2em] text-xs hover:line-through transition-all" 
+           :class="{ 'line-through': activeItem === 'works' }" 
+           style="font-family: 'Azeret Mono', monospace;">WORKS</a>
+        <a :href="labHref" 
+           class="uppercase tracking-[0.2em] text-xs hover:line-through transition-all" 
+           :class="{ 'line-through': activeItem === 'lab' }" 
+           style="font-family: 'Azeret Mono', monospace;">LAB</a>
+        <a :href="infoHref" 
+           class="uppercase tracking-[0.2em] text-xs hover:line-through transition-all" 
+           :class="{ 'line-through': activeItem === 'info' }" 
+           style="font-family: 'Azeret Mono', monospace;">INFO</a>
+    </nav>
+    <div class="flex items-center gap-4">
+        <button @click="$emit('statusClick')" 
+                class="w-3 h-3 rounded-full transition-colors" 
+                :class="isSystemActive ? 'bg-black animate-pulse' : 'bg-red-500'"></button>
+        <span class="uppercase tracking-[0.2em] text-xs" 
+              style="font-family: 'Azeret Mono', monospace;" 
+              v-if="isSystemActive">SYSTEM ACTIVE</span>
+        <span class="uppercase tracking-[0.2em] text-xs" 
+              style="font-family: 'Azeret Mono', monospace;" 
+              v-else>SYSTEM OFFLINE</span>
+    </div>
+</header>
+</div>
+<!-- /component: BrutalistHeader (64b147f5-94d9-4a1b-adac-f157d10ba74d) -->
+
+        <!-- Main Content Grid -->
+        <main class="flex-1 grid grid-cols-12 relative overflow-hidden">
+            <!-- Left Sidebar -->
+            <!-- component: SidebarLeft (7c9474ad-2478-45a7-adee-5a73bc7ac236) -->
+<div v-scope="{ ...{&quot;twitterHref&quot;:&quot;#twitter&quot;,&quot;githubHref&quot;:&quot;#github&quot;,&quot;linkedinHref&quot;:&quot;#linkedin&quot;,&quot;instagramHref&quot;:&quot;#instagram&quot;,&quot;youtubeHref&quot;:&quot;#youtube&quot;}, $emit() {} }">
+<div class="col-span-1 border-r border-black flex flex-col justify-between items-center py-12 h-full relative bg-white/50 backdrop-blur-sm z-30">
+    <div class="flex items-center justify-center" style="writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Azeret Mono', monospace; text-transform: uppercase; letter-spacing: 0.2em; font-size: 11px; font-weight: 600; color: #333;">
+        COORDINATES_0.0.1
+    </div>
+    <div class="flex flex-col gap-8 items-center">
+        <a :href="twitterHref" class="hover:scale-125 transition-transform"><iconify-icon icon="lucide:twitter" class="text-3xl"></iconify-icon></a>
+        <a :href="githubHref" class="hover:scale-125 transition-transform"><iconify-icon icon="lucide:github" class="text-3xl"></iconify-icon></a>
+        <a :href="linkedinHref" class="hover:scale-125 transition-transform"><iconify-icon icon="lucide:linkedin" class="text-3xl"></iconify-icon></a>
+        <a :href="instagramHref" class="hover:scale-125 transition-transform"><iconify-icon icon="lucide:instagram" class="text-3xl"></iconify-icon></a>
+        <a :href="youtubeHref" class="hover:scale-125 transition-transform"><iconify-icon icon="lucide:youtube" class="text-3xl"></iconify-icon></a>
+    </div>
+    <div class="flex items-center justify-center" style="writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Azeret Mono', monospace; text-transform: uppercase; letter-spacing: 0.2em; font-size: 11px; font-weight: 600; color: #333;">
+        REF_772632989
+    </div>
+</div>
+</div>
+<!-- /component: SidebarLeft (7c9474ad-2478-45a7-adee-5a73bc7ac236) -->
+
+            <!-- Center Content Area -->
+            <div class="col-span-10 flex flex-col relative overflow-y-auto scroll-container bg-white/10 backdrop-blur-[2px]">
+                
+                <!-- Section: Page Heading -->
+                <section class="px-8 py-20 border-b border-black">
+                    <div class="mono-text text-[10px] mb-4 flex items-center gap-2">
+                        <span class="px-2 py-0.5 bg-black text-white">REF_WHO_01</span>
+                        <span>ENTITY_IDENTIFICATION_PROTOCOL</span>
+                    </div>
+                    <h1 class="text-8xl md:text-[12rem] font-bold tracking-tighter leading-[0.8] text-black">
+                        WHO<br>AM I
+                    </h1>
+                    <div class="flex justify-end mt-12">
+                        <div class="w-1/2 mono-text text-sm leading-relaxed">
+                             [ CORE STATUS ]: MULTIDISCIPLINARY CREATIVE OPERATING AT THE INTERSECTION OF INDUSTRIAL BRUTALISM AND DIGITAL PRECISION. 
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: Bio & Background -->
+                <section class="grid grid-cols-1 md:grid-cols-2 border-b border-black">
+                    <div class="p-8 border-r border-black">
+                        <div class="mono-text text-[10px] mb-8">[ SYSTEM_BIO_01 ]</div>
+                        <p class="text-xl font-medium leading-tight mb-6">
+                            Douglas Ta is a creative force driven by the raw aesthetics of industrial landscapes and the clinical precision of modern technology.
+                        </p>
+                        <p class="text-neutral-500 leading-relaxed">
+                            With a background rooted in both physical prototyping and digital interface design, Douglas bridges the gap between the tangible and the virtual. His work is characterized by a "less but better" philosophy, stripped of ornamentation to reveal the functional soul within. 
+                        </p>
+                    </div>
+                    <div class="p-8">
+                        <div class="mono-text text-[10px] mb-8">[ BACKGROUND_JOURNEY ]</div>
+                        <div class="space-y-6">
+                            <div class="flex gap-4 items-start">
+                                <span class="mono-text text-xs opacity-40">2020—PRES</span>
+                                <p class="text-sm uppercase tracking-wider">Lead Experience Designer // Neo-Industrial Labs</p>
+                            </div>
+                            <div class="flex gap-4 items-start">
+                                <span class="mono-text text-xs opacity-40">2018—2020</span>
+                                <p class="text-sm uppercase tracking-wider">Senior Product Designer // Void-Dynamics</p>
+                            </div>
+                            <div class="flex gap-4 items-start">
+                                <span class="mono-text text-xs opacity-40">2016—2018</span>
+                                <p class="text-sm uppercase tracking-wider">Interaction Researcher // Zero-Grid Institute</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: Interests & Accomplishments -->
+                <section class="grid grid-cols-1 md:grid-cols-2 border-b border-black">
+                    <div class="p-8 border-r border-black">
+                        <div class="mono-text text-[10px] mb-8">[ PASSIONS_DATA ]</div>
+                        <ul class="space-y-4">
+                            <li class="flex items-center gap-4 group">
+                                <iconify-icon icon="lucide:box" class="text-xl group-hover:rotate-45 transition-transform"></iconify-icon>
+                                <span class="mono-text text-sm">Brutalist Architecture & Form</span>
+                            </li>
+                            <li class="flex items-center gap-4 group">
+                                <iconify-icon icon="lucide:camera" class="text-xl group-hover:rotate-45 transition-transform"></iconify-icon>
+                                <span class="mono-text text-sm">Analog High-Grain Photography</span>
+                            </li>
+                            <li class="flex items-center gap-4 group">
+                                <iconify-icon icon="lucide:waves" class="text-xl group-hover:rotate-45 transition-transform"></iconify-icon>
+                                <span class="mono-text text-sm">Modular Sound Synthesis</span>
+                            </li>
+                            <li class="flex items-center gap-4 group">
+                                <iconify-icon icon="lucide:binary" class="text-xl group-hover:rotate-45 transition-transform"></iconify-icon>
+                                <span class="mono-text text-sm">Speculative Future Narratives</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="p-8">
+                        <div class="mono-text text-[10px] mb-8">[ KEY_MILESTONES ]</div>
+                        <div class="grid grid-cols-1 gap-4">
+                            <div class="p-4 brutalist-border">
+                                <div class="mono-text text-[10px] opacity-40 mb-1">AWARD_01</div>
+                                <div class="text-sm font-bold">DESIGN MUSEUM INTERFACE OF THE YEAR</div>
+                            </div>
+                            <div class="p-4 brutalist-border">
+                                <div class="mono-text text-[10px] opacity-40 mb-1">EXHIBIT_A</div>
+                                <div class="text-sm font-bold">'VOID SPACES' AT THE VENICE BIENNALE</div>
+                            </div>
+                            <div class="p-4 brutalist-border">
+                                <div class="mono-text text-[10px] opacity-40 mb-1">SPEAKER_VOICE</div>
+                                <div class="text-sm font-bold">CONFIG 2024: BRUTALISM IN DIGITAL PRODUCTS</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: Skills & Personal Details -->
+                <section class="grid grid-cols-1 md:grid-cols-3">
+                    <div class="col-span-2 p-8 border-r border-black">
+                        <div class="mono-text text-[10px] mb-8">[ TECHNICAL_COMPETENCIES ]</div>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                            <div>
+                                <h4 class="mono-text text-xs font-bold mb-4">Product</h4>
+                                <ul class="text-xs space-y-2 opacity-60">
+                                    <li>UI/UX DESIGN</li>
+                                    <li>MOTION SYSTEMS</li>
+                                    <li>PROTOTYPING</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="mono-text text-xs font-bold mb-4">Creative</h4>
+                                <ul class="text-xs space-y-2 opacity-60">
+                                    <li>ART DIRECTION</li>
+                                    <li>TYPOGRAPHY</li>
+                                    <li>3D RENDERING</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="mono-text text-xs font-bold mb-4">Systems</h4>
+                                <ul class="text-xs space-y-2 opacity-60">
+                                    <li>HTML/CSS/JS</li>
+                                    <li>WEBGL/GLSL</li>
+                                    <li>DESIGN OPS</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8 bg-black text-white">
+                        <div class="mono-text text-[10px] mb-8 text-neutral-400">[ CONTACT_REACH ]</div>
+                        <div class="space-y-6">
+                            <div>
+                                <span class="block text-[10px] mono-text opacity-40 mb-1">LOCATION_PRIMARY</span>
+                                <span class="text-sm">LONDON // UK [UTC+0]</span>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] mono-text opacity-40 mb-1">AVAILABILITY_STATUS</span>
+                                <span class="text-sm text-green-400">OPEN FOR COLLAB // Q4_2024</span>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] mono-text opacity-40 mb-1">COMMUNICATION_LINK</span>
+                                <a href="mailto:hello@douglasta.com" id="bio-email-link" class="text-sm underline hover:text-neutral-400 transition-colors">HELLO@DOUGLASTA.COM</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Sidebar -->
+            <!-- component: SidebarRight (d26e2119-add7-4a7c-a504-6877a63c4230) -->
+<div v-scope="{ ...{&quot;currentTime&quot;:&quot;00:00:00&quot;}, $emit() {} }">
+<div class="col-span-1 border-l border-black flex flex-col justify-between items-center py-4 relative bg-white/50 backdrop-blur-sm z-30 h-full">
+    <div class="text-[10px] text-[#666] font-mono uppercase tracking-[0.2em]" style="writing-mode: vertical-rl; transform: rotate(180deg);">
+        LOG_4502_TIMESTAMP
+    </div>
+    <div class="flex flex-col items-center gap-12">
+        <div class="w-[1px] h-32 bg-black opacity-30"></div>
+        <div class="w-10 h-10 border border-black flex items-center justify-center" style="animation: spin 10s linear infinite;">
+            <iconify-icon icon="lucide:settings" class="text-lg"></iconify-icon>
+        </div>
+        <div class="w-[1px] h-32 bg-black opacity-30"></div>
+    </div>
+    <div class="font-mono uppercase tracking-[0.2em] text-[10px]" style="writing-mode: vertical-rl; transform: rotate(180deg);">
+        {{ currentTime }}
+    </div>
+</div>
+</div>
+<!-- /component: SidebarRight (d26e2119-add7-4a7c-a504-6877a63c4230) -->
+        </main>
+
+        <!-- Footer Data Bar -->
+        <!-- component: BrutalistFooter (1ebd2821-49e4-4e48-997b-32a16915b1fa) -->
+<div v-scope="{ ...{&quot;showScrollIndicator&quot;:true}, $emit() {} }">
+<footer class="w-full flex items-center justify-between p-2 border border-black z-40 bg-white">
+    <style>
+        @keyframes marquee-footer {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+    <div class="flex gap-12 overflow-hidden whitespace-nowrap group">
+        <div class="flex gap-12 uppercase text-[10px] opacity-40" 
+             style="font-family: 'Azeret Mono', monospace; letter-spacing: 0.2em; animation: marquee-footer 20s linear infinite;">
+            <span>DESIGNING FOR THE VOID // 2024 EDITION</span>
+            <span>●</span>
+            <span>INDUSTRIAL BRUTALISM // CORE_ARCH</span>
+            <span>●</span>
+            <span>MINIMALISM IS SURVIVAL // RA_V_9</span>
+            <span>●</span>
+            <span>DESIGNING FOR THE VOID // 2024 EDITION</span>
+            <!-- Duplicated for seamless loop -->
+            <span>DESIGNING FOR THE VOID // 2024 EDITION</span>
+            <span>●</span>
+            <span>INDUSTRIAL BRUTALISM // CORE_ARCH</span>
+            <span>●</span>
+            <span>MINIMALISM IS SURVIVAL // RA_V_9</span>
+            <span>●</span>
+            <span>DESIGNING FOR THE VOID // 2024 EDITION</span>
+        </div>
+    </div>
+    <div v-if="showScrollIndicator" class="flex items-center gap-4 border-l border-black pl-8 ml-8">
+        <span class="uppercase text-xs whitespace-nowrap" 
+              style="font-family: 'Azeret Mono', monospace; letter-spacing: 0.2em;">[ SCROLL TO EXPLORE ]</span>
+        <iconify-icon icon="lucide:chevron-down" class="animate-bounce"></iconify-icon>
+    </div>
+</footer>
+</div>
+<!-- /component: BrutalistFooter (1ebd2821-49e4-4e48-997b-32a16915b1fa) -->
+    </div>
+
+    <script>
+        const cursor = document.getElementById('custom-cursor');
+        const body = document.body;
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+        });
+
+        const hoverables = document.querySelectorAll('a, button, .brutalist-border, section');
+        hoverables.forEach(el => {
+            el.addEventListener('mouseenter', () => body.classList.add('is-hovering'));
+            el.addEventListener('mouseleave', () => body.classList.remove('is-hovering'));
+        });
+
+        // Update time display for sidebar
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ':' + 
+                            now.getMinutes().toString().padStart(2, '0') + ':' + 
+                            now.getSeconds().toString().padStart(2, '0');
+            const timeElement = document.querySelector('[id^="time-display"]') || document.getElementById('time-display');
+            if (timeElement) timeElement.innerText = timeStr;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+</body>
+</html>
+```
+
+Please reference this design and implement it into our codebase; Try to understand the structure, which part of our codebase is relevant and implement
