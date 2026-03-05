@@ -119,8 +119,9 @@
         main.sphere-main {
             position: absolute; inset: 0; display: grid; place-items: center;
             overflow: hidden; touch-action: none; user-select: none;
-            -webkit-user-select: none; background: transparent;
+            -webkit-user-select: none; background: transparent; cursor: none;
         }
+        #dome-root, #dome-root * { cursor: none !important; }
         .stage {
             width: 100%; height: 100%; display: grid; place-items: center;
             perspective: calc(var(--radius) * 2); perspective-origin: 50% 50%;
@@ -188,6 +189,116 @@
         .edge-fade--top { top: 0; transform: translateX(-50%) rotate(180deg); }
         .edge-fade--bottom { bottom: 0; transform: translateX(-50%); }
         .dg-scroll-lock { overflow: hidden; }
+
+        /* ── Project Modal ────────────────────────────────────────────── */
+        #project-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            pointer-events: none;
+            transition: background 0.3s ease;
+        }
+        #project-modal-overlay.open {
+            background: rgba(0, 0, 0, 0.6);
+            pointer-events: all;
+            backdrop-filter: blur(2px);
+        }
+        #project-modal {
+            background: #ffffff;
+            border: 1px solid black;
+            max-width: 560px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(16px) scale(0.97);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            pointer-events: none;
+        }
+        #project-modal-overlay.open #project-modal {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: all;
+        }
+        .project-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border-bottom: 1px solid black;
+        }
+        .project-modal-body {
+            padding: 24px 16px;
+        }
+        .project-modal-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        .project-modal-tag {
+            font-family: 'Azeret Mono', monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            border: 1px solid black;
+            padding: 3px 8px;
+        }
+        .project-modal-close {
+            cursor: none;
+            background: none;
+            border: none;
+            font-family: 'Azeret Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            padding: 4px 8px;
+            border: 1px solid black;
+            transition: background 0.15s, color 0.15s;
+        }
+        .project-modal-close:hover {
+            background: black;
+            color: white;
+        }
+        .passion-project-item {
+            cursor: none;
+            transition: opacity 0.15s;
+        }
+        .passion-project-item:hover {
+            opacity: 0.6;
+        }
+        .passion-project-item:hover .project-arrow {
+            transform: translateX(4px);
+        }
+        .project-arrow {
+            transition: transform 0.2s ease;
+            font-family: 'Azeret Mono', monospace;
+            font-size: 11px;
+            opacity: 0.4;
+        }
+        #project-modal-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Azeret Mono', monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            border: 1px solid black;
+            padding: 6px 12px;
+            margin-top: 20px;
+            text-decoration: none;
+            color: black;
+            transition: background 0.15s, color 0.15s;
+        }
+        #project-modal-link:hover {
+            background: black;
+            color: white;
+        }
+        #project-modal-link.hidden { display: none; }
     </style>
 </head>
 <body>
@@ -297,7 +408,7 @@
                             </div>
                         </div>
                         <div class="mt-8 text-left mono-text text-sm leading-relaxed">
-                            [ CORE STATUS ]: DESIGNING AT THE INTERSECTION OF AUTONOMOUS REASONING AND SYSTEMIC DISRUPTION. HELPING TO DEFINE THE NEW POSSIBLE.
+                            [ CORE_STATUS ]: DESIGNING AT THE INTERSECTION OF AUTONOMOUS REASONING AND SYSTEMIC DISRUPTION. HELPING TO DEFINE THE NEW POSSIBLE.
                         </div>
                     </div>
                 </div>
@@ -308,27 +419,27 @@
                 <div class="p-8 border-r border-black">
                     <div class="mono-text text-[10px] mb-8">[ SYSTEM_BIO_01 ]</div>
                     <p class="text-xl font-medium leading-tight mb-6">
-                        Douglas Ta is a creative force driven by the raw aesthetics of industrial landscapes and the clinical precision of modern technology.
+                        Douglas Ta is a future technological disrupter with aspirations of forging a path towards seamless AI integration with current business practices.
                     </p>
                     <p class="text-neutral-500 leading-relaxed">
-                        With a background rooted in both physical prototyping and digital interface design, Douglas bridges the gap between the tangible and the virtual. His work is characterized by a "less but better" philosophy, stripped of ornamentation to reveal the functional soul within.
+                        With a M.S. in AI Systems and a B.S. in Computer Science from the University of Florida, his professional foundation is built on deep technical expertise. However, he balances this technical groundwork with a people-first philosophy that guides his approach to every project and partnership.
                     </p>
                 </div>
                 <div class="p-8">
                     <div class="mono-text text-[10px] mb-8">[ BACKGROUND_JOURNEY ]</div>
                     <div class="space-y-6">
                         <div class="flex gap-4 items-start">
-                            <span class="mono-text text-xs opacity-40">2020—PRES</span>
-                            <p class="text-sm uppercase tracking-wider">Lead Experience Designer // Neo-Industrial Labs</p>
+                            <span class="mono-text text-xs opacity-70">AUG 2025 - APR 2026</span>
+                            <p class="text-sm uppercase tracking-wider">AI ENGINEER CO-OP // RAYTHEON</p>
                         </div>
                         <div class="flex gap-4 items-start">
-                            <span class="mono-text text-xs opacity-40">2018—2020</span>
-                            <p class="text-sm uppercase tracking-wider">Senior Product Designer // Void-Dynamics</p>
+                            <span class="mono-text text-xs opacity-70">MAY 2025 - AUG 2025</span>
+                            <p class="text-sm uppercase tracking-wider">SOFTWARE ENGINEER INTERN // ARC TRACKER</p>
                         </div>
                         <div class="flex gap-4 items-start">
-                            <span class="mono-text text-xs opacity-40">2016—2018</span>
-                            <p class="text-sm uppercase tracking-wider">Interaction Researcher // Zero-Grid Institute</p>
-                        </div>
+                            <span class="mono-text text-xs opacity-70">AUG 2023 - APR 2024</span>
+                            <p class="text-sm uppercase tracking-wider">SOFTWARE ENGINEER CO-OP // Freedom Scientific</p>
+                        </div>                     
                     </div>
                 </div>
             </section>
@@ -336,42 +447,89 @@
             <!-- Section: Interests & Accomplishments -->
             <section class="grid grid-cols-1 md:grid-cols-2 border-b border-black">
                 <div class="p-8 border-r border-black">
-                    <div class="mono-text text-[10px] mb-8">[ PASSIONS_DATA ]</div>
+                    <div class="mono-text text-[10px] mb-8">[ PASSION_PROJECTS ]</div>
                     <ul class="space-y-4">
-                        <li class="flex items-center gap-4 group">
-                            <iconify-icon icon="lucide:box" class="text-xl group-hover:rotate-45 transition-transform"></iconify-icon>
-                            <span class="mono-text text-sm">Brutalist Architecture & Form</span>
+                        <li class="flex items-center justify-between gap-4 passion-project-item" data-project="youtube-notion">
+                            <div class="flex items-center gap-4">
+                                <iconify-icon icon="lucide:notebook-pen" class="text-xl transition-transform group-hover:rotate-45"></iconify-icon>
+                                <span class="mono-text text-sm">YOUTUBE TO NOTION NOTES GENERATOR</span>
+                            </div>
+                            <span class="project-arrow">→</span>
                         </li>
-                        <li class="flex items-center gap-4 group">
-                            <iconify-icon icon="lucide:camera" class="text-xl group-hover:rotate-45 transition-transform"></iconify-icon>
-                            <span class="mono-text text-sm">Analog High-Grain Photography</span>
+                        <li class="flex items-center justify-between gap-4 passion-project-item" data-project="agentic-data">
+                            <div class="flex items-center gap-4">
+                                <iconify-icon icon="lucide:chart-candlestick" class="text-xl transition-transform"></iconify-icon>
+                                <span class="mono-text text-sm">AGENTIC DATA ANALYSIS TOOL</span>
+                            </div>
+                            <span class="project-arrow">→</span>
                         </li>
-                        <li class="flex items-center gap-4 group">
-                            <iconify-icon icon="lucide:waves" class="text-xl group-hover:rotate-45 transition-transform"></iconify-icon>
-                            <span class="mono-text text-sm">Modular Sound Synthesis</span>
+                        <li class="flex items-center justify-between gap-4 passion-project-item" data-project="ufish">
+                            <div class="flex items-center gap-4">
+                                <iconify-icon icon="lucide:fish" class="text-xl transition-transform"></iconify-icon>
+                                <span class="mono-text text-sm">UFISH</span>
+                            </div>
+                            <span class="project-arrow">→</span>
                         </li>
-                        <li class="flex items-center gap-4 group">
-                            <iconify-icon icon="lucide:binary" class="text-xl group-hover:rotate-45 transition-transform"></iconify-icon>
-                            <span class="mono-text text-sm">Speculative Future Narratives</span>
+                        <li class="flex items-center justify-between gap-4 passion-project-item" data-project="aura">
+                            <div class="flex items-center gap-4">
+                                <iconify-icon icon="lucide:speech" class="text-xl transition-transform"></iconify-icon>
+                                <span class="mono-text text-sm">AURA</span>
+                            </div>
+                            <span class="project-arrow">→</span>
+                        </li>
+                        <li class="flex items-center justify-between gap-4 passion-project-item" data-project="fiscal-iq">
+                            <div class="flex items-center gap-4">
+                                <iconify-icon icon="lucide:trending-up" class="text-xl transition-transform"></iconify-icon>
+                                <span class="mono-text text-sm">FISCAL IQ <span class="opacity-40">— IN PROGRESS</span></span>
+                            </div>
+                            <span class="project-arrow">→</span>
                         </li>
                     </ul>
                 </div>
                 <div class="p-8">
-                    <div class="mono-text text-[10px] mb-8">[ KEY_MILESTONES ]</div>
+                    <div class="mono-text text-[10px] mb-8">[ PROFESSIONAL_ACCOMPLISHMENTS ]</div>
                     <div class="grid grid-cols-1 gap-4">
-                        <div class="p-4 brutalist-border">
-                            <div class="mono-text text-[10px] opacity-40 mb-1">AWARD_01</div>
-                            <div class="text-sm font-bold">DESIGN MUSEUM INTERFACE OF THE YEAR</div>
-                                </div>
-                        <div class="p-4 brutalist-border">
-                            <div class="mono-text text-[10px] opacity-40 mb-1">EXHIBIT_A</div>
-                            <div class="text-sm font-bold">'VOID SPACES' AT THE VENICE BIENNALE</div>
-                                </div>
-                        <div class="p-4 brutalist-border">
-                            <div class="mono-text text-[10px] opacity-40 mb-1">SPEAKER_VOICE</div>
-                            <div class="text-sm font-bold">CONFIG 2026: BRUTALISM IN DIGITAL PRODUCTS</div>
-                                </div>
-                    </div>
+                        <div class="p-4 brutalist-border group cursor-pointer transition-all duration-300">
+                            <div class="mono-text text-[10px] opacity-70 mb-1">RAYTHEON</div>
+                            <div class="text-sm font-bold">AI ENGINEER CO-OP</div>
+                            <div class="max-h-0 overflow-hidden group-hover:max-h-64 transition-all duration-500 ease-in-out">
+                                <p class="mt-3 text-xs font-bold">LED SOFTWARE ENGINEERING TEAM TO DELIVER A LOW-COST AI SOFTWARE VULNERABILITY DETECTION TOOL.
+                                </p>
+                                <ul class="mt-2 space-y-1 text-xs opacity-70 list-none">
+                                    <li class="flex gap-2"><span class="opacity-40">—</span> Streamlined software penetration tests by reducing previous operational costs by 95% using open-source LLMs
+                                        to power vulnerability detection</li>
+                                    <li class="flex gap-2"><span class="opacity-40">—</span> Architected a local LLM deployment strategy to replace high-cost cloud tools, reducing maintenance costs by 80%
+                                        while ensuring 100% data residency and eliminating third-party data leakage risks</li>
+                                    <li class="flex gap-2"><span class="opacity-40">—</span> Fostered Product Management culture by organizing Scrum sprints that aligned roadmap milestones with cost
+                                        and accuracy KPIs</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="p-4 brutalist-border group cursor-pointer transition-all duration-300">
+                            <div class="mono-text text-[10px] opacity-70 mb-1">ARC TRACKER</div>
+                            <div class="text-sm font-bold">SOFTWARE ENGINEER INTERN</div>
+                            <div class="max-h-0 overflow-hidden group-hover:max-h-64 transition-all duration-500 ease-in-out">
+                                <p class="mt-3 text-xs font-bold">DROVE PRODUCTIVITY OPTMIZATION FROM IDEATION TO EXECUTION BY CREATING AN LLM-DRIVEN INTERFACE FOR CUSTOMERS.</p>
+                                <ul class="mt-2 space-y-1 text-xs opacity-70 list-none">
+                                    <li class="flex gap-2"><span class="opacity-40">—</span> Increased HR workflow efficiency by decreasing average customer turnaround time by 90%</li>
+                                    <li class="flex gap-2"><span class="opacity-40">—</span> Deployed chat services onto the cloud by leveraging Docker and AWS decreasing annual maintenance costs by
+                                        $5000 compared to previous third-party services</li>
+                                    <li class="flex gap-2"><span class="opacity-40">—</span> Monitored product performance through data-driven analytics and A/B testing, achieving 96% customer
+                                        approval in testing</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="p-4 brutalist-border group cursor-pointer transition-all duration-300">
+                            <div class="mono-text text-[10px] opacity-70 mb-1">FREEDOM SCIENTIFIC</div>
+                            <div class="text-sm font-bold">SOFTWARE ENGINEER CO-OP</div>
+                            <div class="max-h-0 overflow-hidden group-hover:max-h-64 transition-all duration-500 ease-in-out">
+                                <p class="mt-3 text-xs font-bold">MANAGED SOFTWARE ENGINEERING TEAM TO DESIGN AND LAUNCH AN AI VIRTUAL ASSISTANT FOR SCREEN-READER SOFTWARE.</p>
+                                <ul class="mt-2 space-y-1 text-xs opacity-70 list-none">
+                                    <li class="flex gap-2"><span class="opacity-40">—</span> Optimized user experience using company products resulting in an overall increase in user satisfaction by 61%</li>
+                                    <li class="flex gap-2"><span class="opacity-40">—</span> Adopted an automated user feedback loop that contributed to an increase of internal testing accuracy by 22%</li>
+                                </ul>                                
+                            </div>
+                        </div>
                 </div>
             </section>
 
@@ -407,19 +565,19 @@
                     </div>
                 </div>
                 <div class="p-8 bg-black text-white">
-                    <div class="mono-text text-[10px] mb-8 text-neutral-400">[ CONTACT_REACH ]</div>
+                    <div class="mono-text text-[10px] mb-8 text-neutral-400">[ CONTACT ]</div>
                     <div class="space-y-6">
                         <div>
                             <span class="block text-[10px] mono-text opacity-40 mb-1">LOCATION_PRIMARY</span>
-                            <span class="text-sm">LONDON // UK [UTC+0]</span>
+                            <span class="text-sm">GAINESVILLE // US [UTC-5]</span>
                         </div>
                         <div>
                             <span class="block text-[10px] mono-text opacity-40 mb-1">AVAILABILITY_STATUS</span>
-                            <span class="text-sm text-green-400">OPEN FOR COLLAB // Q4_2026</span>
+                            <span class="text-sm text-green-400">OPEN FOR WORK // MAY_2026</span>
                         </div>
                         <div>
                             <span class="block text-[10px] mono-text opacity-40 mb-1">COMMUNICATION_LINK</span>
-                            <a href="mailto:hello@douglasta.com" class="text-sm underline hover:text-neutral-400 transition-colors">HELLO@DOUGLASTA.COM</a>
+                            <a href="mailto:hello@douglasta.com" class="text-sm underline hover:text-neutral-400 transition-colors">DOUGLAS.DUC.TA@GMAIL.COM</a>
                         </div>
                     </div>
                 </div>
@@ -444,6 +602,27 @@
             </div>
         </div>
 
+    </div>
+
+    <!-- Project Modal -->
+    <div id="project-modal-overlay">
+        <div id="project-modal">
+            <div class="project-modal-header">
+                <div>
+                    <div class="mono-text text-[10px] opacity-50 mb-1" id="modal-label">[ PASSION_PROJECT ]</div>
+                    <div class="mono-text text-sm font-bold" id="modal-title">PROJECT NAME</div>
+                </div>
+                <button class="project-modal-close" id="modal-close-btn">[ CLOSE ]</button>
+            </div>
+            <div class="project-modal-body">
+                <p class="text-sm leading-relaxed opacity-80" id="modal-description"></p>
+                <div class="project-modal-tags" id="modal-tags"></div>
+                <a href="#" id="project-modal-link" target="_blank">
+                    <iconify-icon icon="lucide:github"></iconify-icon>
+                    VIEW ON GITHUB
+                </a>
+            </div>
+        </div>
     </div>
 
     <!-- Footer -->
@@ -516,6 +695,83 @@
             const y = (e.clientY / window.innerHeight - 0.5) * 20;
             techImg.style.transform = `scale(1.1) translate(${x}px, ${y}px)`;
         }
+    });
+
+    // ── Passion Project Modal ────────────────────────────────────────
+    const PROJECTS = {
+        'youtube-notion': {
+            title: 'YOUTUBE TO NOTION NOTES GENERATOR',
+            description: 'All-in-One is a modular knowledge capture application designed to convert multimedia content into structured learning resources. The current implementation features a YouTube-to-Notion pipeline where users paste a YouTube URL and automatically receive AI-generated notes organized into a Notion page. The system uses a React frontend and FastAPI backend to orchestrate a pipeline that fetches video metadata, categorizes the content, generates notes using Google NotebookLM, and writes the structured output to Notion while providing real-time progress updates through streaming events. The project is designed as an extensible hub for future tools that help automate knowledge capture and learning workflows.',
+            tags: ['TypeScript', 'Python', 'JavaScript', 'MCP', 'NotebookLM', 'Notion'],
+            link: "https://github.com/douglasta2024/All-in-One"
+        },
+        'agentic-data': {
+            title: 'AGENTIC DATA ANALYSIS TOOL',
+            description: 'Agentic Data Analysis Tool is an AI-powered application that enables users to perform exploratory data analysis through natural language using an agent-based workflow. Users can upload datasets and ask questions about their data, while the system interprets the request, generates and executes Python analysis code, and returns visualizations and insights. Built with Python and Streamlit, the tool demonstrates how large language models and modular tools can automate common data science tasks such as data exploration, statistical analysis, and visualization through a conversational interface.',
+            tags: ['Python', 'AI Agents', 'Streamlit', 'Data Analysis', 'LLM'],
+            link: 'https://github.com/douglasta2024/Agentic-Data-Analysis-Tool'
+        },
+        'ufish': {
+            title: 'UFISH',
+            description: 'UFish is a computer vision project that uses deep learning to identify and classify fish species from underwater images. The system trains an object detection model on labeled fish datasets to detect and classify species in visual data, demonstrating how AI can automate ecological monitoring and marine research tasks. The model is optimized and trained with deployment constraints in mind so it can run efficiently on edge devices, enabling real-time fish detection in environments where cloud connectivity or high compute resources are limited. By combining dataset preprocessing, model training, evaluation, and edge-ready deployment considerations, the project highlights how computer vision can scale aquatic ecosystem monitoring.',
+            tags: ['Computer Vision', 'Edge Device', 'Python', 'PyTorch'],
+            link: 'https://github.com/douglasta2024/UFish'
+        },
+        'aura': {
+            title: 'AURA',
+            description: 'AURA is a speech command classification system that enables hands-free drone control. It fine-tunes a Wav2Vec2 transformer on the Google Speech Commands dataset and exposes a Streamlit web interface for recording commands, which are then relayed to drone hardware via two ESP microcontrollers over serial.',
+            tags: ['Autonomous Control', 'Python', 'Arduino', 'Deep Learning'],
+            link: 'https://github.com/douglasta2024/AURA'
+        },
+        'fiscal-iq': {
+            title: 'FISCAL IQ',
+            description: 'A personal finance intelligence tool that combines a stock portfolio tracker with AI-powered news aggregation. Users can manage portfolios, track live stock prices, and fetch curated financial news — optionally piped into Google NotebookLM for deeper AI-driven research.',
+            tags: ['FinTech', 'LLM', 'React', 'Python', 'JavaScript', 'CSS', 'HTML'],
+            link: 'https://github.com/douglasta2024/Fiscal-IQ/tree/main',
+            wip: true
+        }
+    };
+
+    const overlay    = document.getElementById('project-modal-overlay');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc  = document.getElementById('modal-description');
+    const modalTags  = document.getElementById('modal-tags');
+    const modalLink  = document.getElementById('project-modal-link');
+    const modalLabel = document.getElementById('modal-label');
+    const closeBtn   = document.getElementById('modal-close-btn');
+
+    function openProjectModal(key) {
+        const p = PROJECTS[key];
+        if (!p) return;
+        modalLabel.textContent = p.wip ? '[ PASSION_PROJECT — IN PROGRESS ]' : '[ PASSION_PROJECT ]';
+        modalTitle.textContent = p.title;
+        modalDesc.textContent  = p.description;
+        modalTags.innerHTML = p.tags.map(t => `<span class="project-modal-tag">${t}</span>`).join('');
+        if (p.link) {
+            modalLink.href = p.link;
+            modalLink.classList.remove('hidden');
+        } else {
+            modalLink.classList.add('hidden');
+        }
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeProjectModal() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.passion-project-item').forEach(el => {
+        el.addEventListener('click', () => openProjectModal(el.dataset.project));
+    });
+
+    closeBtn.addEventListener('click', closeProjectModal);
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeProjectModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeProjectModal();
     });
 
     // ── Dome Gallery ────────────────────────────────────────────────
