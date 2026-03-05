@@ -1,0 +1,10 @@
+services:
+  portfolio:
+    image: node:alpine
+    working_dir: /app
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/app
+    command: npx live-server --port=8080 --host=0.0.0.0 --no-browser
+    restart: unless-stopped
