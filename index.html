@@ -143,6 +143,91 @@
         }
 
         sd-component { display: block; }
+
+        /* ── Dome Gallery ─────────────────────────────────────────── */
+        .sphere-root {
+            position: relative; width: 100%; height: 100%;
+            --radius: 520px; --viewer-pad: 72px;
+            --circ: calc(var(--radius) * 3.14159);
+            --rot-y: calc((360deg / var(--segments-x)) / 2);
+            --rot-x: calc((360deg / var(--segments-y)) / 2);
+            --item-width: calc(var(--circ) / var(--segments-x));
+            --item-height: calc(var(--circ) / var(--segments-y));
+        }
+        .sphere-root * { box-sizing: border-box; }
+        .sphere, .item, .item__image { transform-style: preserve-3d; }
+        main.sphere-main {
+            position: absolute; inset: 0; display: grid; place-items: center;
+            overflow: hidden; touch-action: none; user-select: none;
+            -webkit-user-select: none; background: transparent;
+        }
+        .stage {
+            width: 100%; height: 100%; display: grid; place-items: center;
+            perspective: calc(var(--radius) * 2); perspective-origin: 50% 50%;
+            contain: layout paint size;
+        }
+        .sphere { transform: translateZ(calc(var(--radius) * -1)); will-change: transform; }
+        .overlay, .overlay--blur {
+            position: absolute; inset: 0; margin: auto; z-index: 3; pointer-events: none;
+        }
+        .overlay {
+            background-image: radial-gradient(rgba(235,235,235,0) 65%, var(--overlay-blur-color,#ffffff) 100%);
+        }
+        .overlay--blur {
+            -webkit-mask-image: radial-gradient(rgba(235,235,235,0) 70%, var(--overlay-blur-color,#ffffff) 90%);
+            mask-image: radial-gradient(rgba(235,235,235,0) 70%, var(--overlay-blur-color,#ffffff) 90%);
+            backdrop-filter: blur(3px);
+        }
+        .item {
+            width: calc(var(--item-width) * var(--item-size-x));
+            height: calc(var(--item-height) * var(--item-size-y));
+            position: absolute; top: -999px; bottom: -999px; left: -999px; right: -999px; margin: auto;
+            transform-origin: 50% 50%; backface-visibility: hidden; transition: transform 300ms;
+            transform:
+                rotateY(calc(var(--rot-y) * (var(--offset-x) + ((var(--item-size-x) - 1) / 2)) + var(--rot-y-delta, 0deg)))
+                rotateX(calc(var(--rot-x) * (var(--offset-y) - ((var(--item-size-y) - 1) / 2)) + var(--rot-x-delta, 0deg)))
+                translateZ(var(--radius));
+        }
+        .item__image {
+            position: absolute; display: block; inset: 10px;
+            border-radius: var(--tile-radius, 12px); background: transparent; overflow: hidden;
+            backface-visibility: hidden; transition: transform 300ms; cursor: pointer;
+            -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+            pointer-events: auto; -webkit-transform: translateZ(0); transform: translateZ(0);
+        }
+        .item__image:focus { outline: none; }
+        .item__image img {
+            width: 100%; height: 100%; object-fit: cover; pointer-events: none;
+            backface-visibility: hidden; filter: var(--image-filter, none);
+        }
+        .viewer {
+            position: absolute; inset: 0; z-index: 20; pointer-events: none;
+            display: flex; align-items: center; justify-content: center; padding: var(--viewer-pad);
+        }
+        .viewer .frame {
+            height: 100%; aspect-ratio: 1; border-radius: var(--enlarge-radius,32px); display: flex;
+        }
+        @media (max-aspect-ratio: 1/1) { .viewer .frame { height: auto; width: 100%; } }
+        .viewer .scrim {
+            position: absolute; inset: 0; z-index: 10; background: rgba(0,0,0,0.4);
+            pointer-events: none; opacity: 0; transition: opacity 500ms ease; backdrop-filter: blur(3px);
+        }
+        .sphere-root[data-enlarging='true'] .viewer .scrim { opacity: 1; pointer-events: all; }
+        .viewer .enlarge {
+            position: absolute; z-index: 30; border-radius: var(--enlarge-radius,32px); overflow: hidden;
+            transition: transform 500ms ease, opacity 500ms ease;
+            transform-origin: top left; box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+        }
+        .viewer .enlarge img { width: 100%; height: 100%; object-fit: cover; filter: var(--image-filter, none); }
+        .sphere-root .enlarge-closing img { filter: var(--image-filter, none); }
+        .edge-fade {
+            position: absolute; left: 50%; height: 70px; z-index: 5; pointer-events: none;
+            width: calc(var(--radius, 400px) * 2);
+            background: linear-gradient(to bottom, transparent, var(--overlay-blur-color,#ffffff));
+        }
+        .edge-fade--top { top: 0; transform: translateX(-50%) rotate(180deg); }
+        .edge-fade--bottom { bottom: 0; transform: translateX(-50%); }
+        .dg-scroll-lock { overflow: hidden; }
     </style>
 </head>
 <body>
@@ -224,9 +309,29 @@
                     <span class="px-2 py-0.5 bg-black text-white">REF_WHO_01</span>
                     <span>ENTITY_IDENTIFICATION_PROTOCOL</span>
                 </div>
-                <h2 class="text-8xl md:text-[12rem] font-bold tracking-tighter leading-[0.8] text-black">
-                    WHO<br>AM I
-                </h2>
+                <div class="flex items-center gap-8">
+                    <h2 class="text-8xl md:text-[12rem] font-bold tracking-tighter leading-[0.8] text-black shrink-0">
+                        WHO<br>AM I
+                    </h2>
+                    <div class="flex-1 relative overflow-hidden" style="height:420px;">
+                        <div class="sphere-root" id="dome-root"
+                            style="--segments-x:35;--segments-y:35;--overlay-blur-color:#ffffff;--tile-radius:4px;--enlarge-radius:4px;--image-filter:grayscale(1)">
+                            <main class="sphere-main" id="dome-main">
+                                <div class="stage">
+                                    <div class="sphere" id="dome-sphere"></div>
+                                </div>
+                                <div class="overlay"></div>
+                                <div class="overlay overlay--blur"></div>
+                                <div class="edge-fade edge-fade--top"></div>
+                                <div class="edge-fade edge-fade--bottom"></div>
+                                <div class="viewer" id="dome-viewer">
+                                    <div class="scrim" id="dome-scrim"></div>
+                                    <div class="frame" id="dome-frame"></div>
+                                </div>
+                            </main>
+                        </div>
+                    </div>
+                </div>
                 <div class="flex justify-end mt-12">
                     <div class="w-1/2 mono-text text-sm leading-relaxed">
                         [ CORE STATUS ]: DESIGNING AT THE INTERSECTION OF AUTONOMOUS REASONING AND SYSTEMIC DISRUPTION. HELPING TO DEFINE THE NEW POSSIBLE.
@@ -455,6 +560,311 @@
             techImg.style.transform = `scale(1.1) translate(${x}px, ${y}px)`;
         }
     });
+
+    // ── Dome Gallery ────────────────────────────────────────────────
+    (function initDomeGallery() {
+        const IMAGES = [
+            { src: 'https://images.unsplash.com/photo-1755331039789-7e5680e26e8f?q=80&w=774&auto=format&fit=crop', alt: 'Abstract art' },
+            { src: 'https://images.unsplash.com/photo-1755569309049-98410b94f66d?q=80&w=772&auto=format&fit=crop', alt: 'Modern sculpture' },
+            { src: 'https://images.unsplash.com/photo-1755497595318-7e5e3523854f?q=80&w=774&auto=format&fit=crop', alt: 'Digital artwork' },
+            { src: 'https://images.unsplash.com/photo-1755353985163-c2a0fe5ac3d8?q=80&w=774&auto=format&fit=crop', alt: 'Contemporary art' },
+            { src: 'https://images.unsplash.com/photo-1745965976680-d00be7dc0377?q=80&w=774&auto=format&fit=crop', alt: 'Geometric pattern' },
+            { src: 'https://images.unsplash.com/photo-1752588975228-21f44630bb3c?q=80&w=774&auto=format&fit=crop', alt: 'Textured surface' },
+            { src: 'https://pbs.twimg.com/media/Gyla7NnXMAAXSo_?format=jpg&name=large', alt: 'Social media image' }
+        ];
+        const segments = 35;
+        const maxVerticalRotationDeg = 5;
+        const dragSensitivity = 20;
+        const enlargeTransitionMs = 300;
+        const dragDampening = 2;
+        const minRadius = 400;
+        const fit = 0.5;
+        const padFactor = 0.25;
+        const openedImageWidth = '250px';
+        const openedImageHeight = '350px';
+
+        const clampVal = (v, mn, mx) => Math.min(Math.max(v, mn), mx);
+        const normalizeAngle = d => ((d % 360) + 360) % 360;
+        const wrapAngleSigned = deg => { const a = (((deg + 180) % 360) + 360) % 360; return a - 180; };
+        const getDataNumber = (el, name, fallback) => {
+            const attr = el.dataset[name] ?? el.getAttribute('data-' + name);
+            const n = attr == null ? NaN : parseFloat(attr);
+            return Number.isFinite(n) ? n : fallback;
+        };
+
+        function buildItems(pool, seg) {
+            const xCols = Array.from({ length: seg }, (_, i) => -37 + i * 2);
+            const evenYs = [-4, -2, 0, 2, 4];
+            const oddYs  = [-3, -1, 1, 3, 5];
+            const coords = xCols.flatMap((x, c) => {
+                const ys = c % 2 === 0 ? evenYs : oddYs;
+                return ys.map(y => ({ x, y, sizeX: 2, sizeY: 2 }));
+            });
+            const totalSlots = coords.length;
+            const normalizedImages = pool.map(img => typeof img === 'string' ? { src: img, alt: '' } : { src: img.src || '', alt: img.alt || '' });
+            const usedImages = Array.from({ length: totalSlots }, (_, i) => normalizedImages[i % normalizedImages.length]);
+            for (let i = 1; i < usedImages.length; i++) {
+                if (usedImages[i].src === usedImages[i - 1].src) {
+                    for (let j = i + 1; j < usedImages.length; j++) {
+                        if (usedImages[j].src !== usedImages[i].src) {
+                            const tmp = usedImages[i]; usedImages[i] = usedImages[j]; usedImages[j] = tmp; break;
+                        }
+                    }
+                }
+            }
+            return coords.map((c, i) => ({ ...c, src: usedImages[i].src, alt: usedImages[i].alt }));
+        }
+
+        function computeItemBaseRotation(offsetX, offsetY, sizeX, sizeY, segs) {
+            const unit = 360 / segs / 2;
+            return { rotateX: unit * (offsetY - (sizeY - 1) / 2), rotateY: unit * (offsetX + (sizeX - 1) / 2) };
+        }
+
+        const rootEl   = document.getElementById('dome-root');
+        const mainEl   = document.getElementById('dome-main');
+        const sphereEl = document.getElementById('dome-sphere');
+        const viewerEl = document.getElementById('dome-viewer');
+        const scrimEl  = document.getElementById('dome-scrim');
+        const frameEl  = document.getElementById('dome-frame');
+        if (!rootEl) return;
+
+        // Build tiles
+        const items = buildItems(IMAGES, segments);
+        const frag = document.createDocumentFragment();
+        items.forEach(it => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'item';
+            itemDiv.dataset.src     = it.src;
+            itemDiv.dataset.offsetX = it.x;
+            itemDiv.dataset.offsetY = it.y;
+            itemDiv.dataset.sizeX   = it.sizeX;
+            itemDiv.dataset.sizeY   = it.sizeY;
+            itemDiv.style.setProperty('--offset-x',    it.x);
+            itemDiv.style.setProperty('--offset-y',    it.y);
+            itemDiv.style.setProperty('--item-size-x', it.sizeX);
+            itemDiv.style.setProperty('--item-size-y', it.sizeY);
+            const imgDiv = document.createElement('div');
+            imgDiv.className = 'item__image';
+            imgDiv.setAttribute('role', 'button');
+            imgDiv.tabIndex = 0;
+            imgDiv.setAttribute('aria-label', it.alt || 'Open image');
+            const img = document.createElement('img');
+            img.src = it.src; img.draggable = false; img.alt = it.alt;
+            imgDiv.appendChild(img);
+            itemDiv.appendChild(imgDiv);
+            frag.appendChild(itemDiv);
+        });
+        sphereEl.appendChild(frag);
+
+        // State
+        const rotation = { x: 0, y: 0 };
+        let startRot = { x: 0, y: 0 }, startPos = null;
+        let dragging = false, moved = false;
+        let inertiaRAF = null, opening = false;
+        let openStartedAt = 0, lastDragEndAt = 0;
+        let focusedEl = null, originalTilePosition = null;
+        let prevX = 0, prevY = 0, prevTime = 0, velX = 0, velY = 0;
+
+        function applyTransform(xDeg, yDeg) {
+            sphereEl.style.transform = `translateZ(calc(var(--radius) * -1)) rotateX(${xDeg}deg) rotateY(${yDeg}deg)`;
+        }
+
+        // ResizeObserver
+        new ResizeObserver(entries => {
+            const cr = entries[0].contentRect;
+            const w = Math.max(1, cr.width), h = Math.max(1, cr.height);
+            const minDim = Math.min(w, h), aspect = w / h;
+            let basis = aspect >= 1.3 ? w : minDim;
+            let radius = clampVal(Math.min(basis * fit, h * 1.35), minRadius, Infinity);
+            rootEl.style.setProperty('--radius', `${Math.round(radius)}px`);
+            rootEl.style.setProperty('--viewer-pad', `${Math.max(8, Math.round(minDim * padFactor))}px`);
+            applyTransform(rotation.x, rotation.y);
+        }).observe(rootEl);
+        applyTransform(0, 0);
+
+        // Inertia
+        function stopInertia() { if (inertiaRAF) { cancelAnimationFrame(inertiaRAF); inertiaRAF = null; } }
+        function startInertia(vx, vy) {
+            const MAX_V = 1.4;
+            let vX = clampVal(vx, -MAX_V, MAX_V) * 80, vY = clampVal(vy, -MAX_V, MAX_V) * 80;
+            let frames = 0;
+            const d = clampVal(dragDampening, 0, 1);
+            const friction = 0.94 + 0.055 * d, stopThr = 0.015 - 0.01 * d, maxF = Math.round(90 + 270 * d);
+            stopInertia();
+            function step() {
+                vX *= friction; vY *= friction;
+                if ((Math.abs(vX) < stopThr && Math.abs(vY) < stopThr) || ++frames > maxF) { inertiaRAF = null; return; }
+                rotation.x = clampVal(rotation.x - vY / 200, -maxVerticalRotationDeg, maxVerticalRotationDeg);
+                rotation.y = wrapAngleSigned(rotation.y + vX / 200);
+                applyTransform(rotation.x, rotation.y);
+                inertiaRAF = requestAnimationFrame(step);
+            }
+            inertiaRAF = requestAnimationFrame(step);
+        }
+
+        // Drag — pointer events
+        mainEl.addEventListener('pointerdown', e => {
+            if (focusedEl) return;
+            stopInertia();
+            dragging = true; moved = false;
+            startRot = { ...rotation };
+            startPos = { x: e.clientX, y: e.clientY };
+            prevX = e.clientX; prevY = e.clientY; prevTime = performance.now(); velX = 0; velY = 0;
+            mainEl.setPointerCapture(e.pointerId);
+        });
+        mainEl.addEventListener('pointermove', e => {
+            if (!dragging || !startPos || focusedEl) return;
+            const dxT = e.clientX - startPos.x, dyT = e.clientY - startPos.y;
+            if (!moved && dxT * dxT + dyT * dyT > 16) moved = true;
+            const now = performance.now(), dt = now - prevTime || 16;
+            velX = (e.clientX - prevX) / dt; velY = (e.clientY - prevY) / dt;
+            prevX = e.clientX; prevY = e.clientY; prevTime = now;
+            rotation.x = clampVal(startRot.x - dyT / dragSensitivity, -maxVerticalRotationDeg, maxVerticalRotationDeg);
+            rotation.y = wrapAngleSigned(startRot.y + dxT / dragSensitivity);
+            applyTransform(rotation.x, rotation.y);
+        });
+        mainEl.addEventListener('pointerup', () => {
+            if (!dragging) return;
+            dragging = false;
+            if (Math.abs(velX) > 0.005 || Math.abs(velY) > 0.005) startInertia(velX * 1000, velY * 1000);
+            if (moved) lastDragEndAt = performance.now();
+            moved = false;
+        });
+
+        // Click to enlarge
+        function openItem(imgDiv) {
+            if (opening) return;
+            opening = true; openStartedAt = performance.now();
+            const parent = imgDiv.parentElement;
+            focusedEl = imgDiv;
+            imgDiv.setAttribute('data-focused', 'true');
+            const offsetX = getDataNumber(parent, 'offsetX', 0), offsetY = getDataNumber(parent, 'offsetY', 0);
+            const sizeX   = getDataNumber(parent, 'sizeX',   2), sizeY   = getDataNumber(parent, 'sizeY',   2);
+            const parentRot = computeItemBaseRotation(offsetX, offsetY, sizeX, sizeY, segments);
+            let rotY = -(normalizeAngle(parentRot.rotateY) + normalizeAngle(rotation.y)) % 360;
+            if (rotY < -180) rotY += 360;
+            parent.style.setProperty('--rot-y-delta', `${rotY}deg`);
+            parent.style.setProperty('--rot-x-delta', `${-parentRot.rotateX - rotation.x}deg`);
+
+            const refDiv = document.createElement('div');
+            refDiv.className = 'item__image item__image--reference';
+            refDiv.style.opacity = '0';
+            refDiv.style.transform = `rotateX(${-parentRot.rotateX}deg) rotateY(${-parentRot.rotateY}deg)`;
+            parent.appendChild(refDiv);
+            void refDiv.offsetHeight;
+
+            const tileR  = refDiv.getBoundingClientRect();
+            const mainR  = mainEl.getBoundingClientRect();
+            const frameR = frameEl.getBoundingClientRect();
+            if (tileR.width <= 0 || tileR.height <= 0) {
+                opening = false; focusedEl = null; parent.removeChild(refDiv); return;
+            }
+            originalTilePosition = { left: tileR.left, top: tileR.top, width: tileR.width, height: tileR.height };
+            imgDiv.style.visibility = 'hidden'; imgDiv.style.zIndex = 0;
+
+            const overlay = document.createElement('div');
+            overlay.className = 'enlarge';
+            Object.assign(overlay.style, {
+                position: 'absolute',
+                left: (frameR.left - mainR.left) + 'px', top: (frameR.top - mainR.top) + 'px',
+                width: frameR.width + 'px', height: frameR.height + 'px',
+                opacity: '0', zIndex: '30', willChange: 'transform, opacity',
+                transformOrigin: 'top left',
+                transition: `transform ${enlargeTransitionMs}ms ease, opacity ${enlargeTransitionMs}ms ease`
+            });
+            const oImg = document.createElement('img');
+            oImg.src = parent.dataset.src || imgDiv.querySelector('img')?.src || '';
+            overlay.appendChild(oImg);
+            viewerEl.appendChild(overlay);
+
+            const sx0 = tileR.width  / frameR.width  || 1;
+            const sy0 = tileR.height / frameR.height || 1;
+            overlay.style.transform = `translate(${tileR.left - frameR.left}px, ${tileR.top - frameR.top}px) scale(${sx0}, ${sy0})`;
+            setTimeout(() => {
+                if (!overlay.parentElement) return;
+                overlay.style.opacity = '1';
+                overlay.style.transform = 'translate(0,0) scale(1,1)';
+                rootEl.setAttribute('data-enlarging', 'true');
+            }, 16);
+
+            if (openedImageWidth || openedImageHeight) {
+                overlay.addEventListener('transitionend', function onFirst(ev) {
+                    if (ev.propertyName !== 'transform') return;
+                    overlay.removeEventListener('transitionend', onFirst);
+                    const prevT = overlay.style.transition;
+                    overlay.style.transition = 'none';
+                    const tw = openedImageWidth || `${frameR.width}px`, th = openedImageHeight || `${frameR.height}px`;
+                    const tmp = document.createElement('div');
+                    tmp.style.cssText = `position:absolute;width:${tw};height:${th};visibility:hidden;`;
+                    document.body.appendChild(tmp);
+                    const tmpR = tmp.getBoundingClientRect();
+                    document.body.removeChild(tmp);
+                    void overlay.offsetWidth;
+                    overlay.style.transition = `left ${enlargeTransitionMs}ms ease, top ${enlargeTransitionMs}ms ease, width ${enlargeTransitionMs}ms ease, height ${enlargeTransitionMs}ms ease`;
+                    requestAnimationFrame(() => {
+                        overlay.style.left   = `${frameR.left - mainR.left + (frameR.width  - tmpR.width)  / 2}px`;
+                        overlay.style.top    = `${frameR.top  - mainR.top  + (frameR.height - tmpR.height) / 2}px`;
+                        overlay.style.width  = tw; overlay.style.height = th;
+                    });
+                    overlay.addEventListener('transitionend', () => { overlay.style.transition = prevT; }, { once: true });
+                });
+            }
+        }
+
+        function closeItem() {
+            if (performance.now() - openStartedAt < 250 || !focusedEl) return;
+            const el = focusedEl, parent = el.parentElement;
+            const overlay = viewerEl.querySelector('.enlarge');
+            if (!overlay) return;
+            const refDiv = parent.querySelector('.item__image--reference');
+            const origPos = originalTilePosition;
+            const rootRect = rootEl.getBoundingClientRect();
+
+            if (!origPos) {
+                overlay.remove(); if (refDiv) refDiv.remove();
+                parent.style.setProperty('--rot-y-delta', '0deg'); parent.style.setProperty('--rot-x-delta', '0deg');
+                el.style.visibility = ''; el.style.zIndex = 0; focusedEl = null;
+                rootEl.removeAttribute('data-enlarging'); opening = false; return;
+            }
+            const cur = overlay.getBoundingClientRect();
+            const anim = document.createElement('div');
+            anim.className = 'enlarge-closing';
+            anim.style.cssText = `position:absolute;left:${cur.left - rootRect.left}px;top:${cur.top - rootRect.top}px;width:${cur.width}px;height:${cur.height}px;z-index:9999;border-radius:var(--enlarge-radius,32px);overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35);transition:all ${enlargeTransitionMs}ms ease-out;pointer-events:none;`;
+            const clonedImg = overlay.querySelector('img');
+            if (clonedImg) { const ci = clonedImg.cloneNode(); ci.style.cssText = 'width:100%;height:100%;object-fit:cover;'; anim.appendChild(ci); }
+            overlay.remove(); rootEl.appendChild(anim);
+            void anim.getBoundingClientRect();
+            requestAnimationFrame(() => {
+                anim.style.left = `${origPos.left - rootRect.left}px`; anim.style.top = `${origPos.top - rootRect.top}px`;
+                anim.style.width = origPos.width + 'px'; anim.style.height = origPos.height + 'px';
+                anim.style.opacity = '0';
+            });
+            anim.addEventListener('transitionend', () => {
+                anim.remove(); originalTilePosition = null; if (refDiv) refDiv.remove();
+                parent.style.transition = 'none'; el.style.transition = 'none';
+                parent.style.setProperty('--rot-y-delta', '0deg'); parent.style.setProperty('--rot-x-delta', '0deg');
+                requestAnimationFrame(() => {
+                    el.style.visibility = ''; el.style.opacity = '0'; el.style.zIndex = 0;
+                    focusedEl = null; rootEl.removeAttribute('data-enlarging');
+                    requestAnimationFrame(() => {
+                        parent.style.transition = ''; el.style.transition = 'opacity 300ms ease-out';
+                        requestAnimationFrame(() => {
+                            el.style.opacity = '1';
+                            setTimeout(() => { el.style.transition = ''; el.style.opacity = ''; opening = false; }, 300);
+                        });
+                    });
+                });
+            }, { once: true });
+        }
+
+        sphereEl.addEventListener('click', e => {
+            if (moved || performance.now() - lastDragEndAt < 80 || opening) return;
+            const imgDiv = e.target.closest('.item__image');
+            if (imgDiv) openItem(imgDiv);
+        });
+        scrimEl.addEventListener('click', closeItem);
+        window.addEventListener('keydown', e => { if (e.key === 'Escape') closeItem(); });
+    })();
 
     // Holographic card tilt — translated from components.md HolographicCard
     document.querySelectorAll('.holographic-card').forEach(card => {
