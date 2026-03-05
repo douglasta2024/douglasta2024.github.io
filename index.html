@@ -64,46 +64,6 @@
 
         .brutalist-border { border: 1px solid black; }
 
-        /* Holographic card effect — translated from components.md */
-        .holographic-card {
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.15s ease-out;
-            will-change: transform;
-            overflow: hidden;
-        }
-
-        .holo-glow {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(
-                circle at var(--bg-x, 50%) var(--bg-y, 50%),
-                rgba(0, 255, 255, 0.25),
-                rgba(0, 212, 255, 0.20) 18%,
-                rgba(0, 191, 255, 0.15) 32%,
-                rgba(0, 169, 255, 0.10) 45%,
-                transparent 42%
-            ),
-            linear-gradient(
-                115deg,
-                transparent 30%,
-                rgba(0, 169, 255, 0.18) 37%,
-                rgba(0, 191, 255, 0.20) 43%,
-                rgba(0, 212, 255, 0.20) 50%,
-                rgba(0, 233, 255, 0.18) 57%,
-                rgba(0, 255, 255, 0.15) 63%,
-                transparent 70%
-            );
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            mix-blend-mode: screen;
-            z-index: 1;
-        }
-
-        .holographic-card:hover .holo-glow {
-            opacity: 1;
-        }
 
         .vertical-text {
             writing-mode: vertical-rl;
@@ -171,11 +131,11 @@
             position: absolute; inset: 0; margin: auto; z-index: 3; pointer-events: none;
         }
         .overlay {
-            background-image: radial-gradient(rgba(235,235,235,0) 65%, var(--overlay-blur-color,#ffffff) 100%);
+            background-image: radial-gradient(rgba(235,235,235,0) 82%, var(--overlay-blur-color,#ffffff) 100%);
         }
         .overlay--blur {
-            -webkit-mask-image: radial-gradient(rgba(235,235,235,0) 70%, var(--overlay-blur-color,#ffffff) 90%);
-            mask-image: radial-gradient(rgba(235,235,235,0) 70%, var(--overlay-blur-color,#ffffff) 90%);
+            -webkit-mask-image: radial-gradient(rgba(235,235,235,0) 85%, var(--overlay-blur-color,#ffffff) 95%);
+            mask-image: radial-gradient(rgba(235,235,235,0) 85%, var(--overlay-blur-color,#ffffff) 95%);
             backdrop-filter: blur(3px);
         }
         .item {
@@ -191,7 +151,7 @@
         .item__image {
             position: absolute; display: block; inset: 10px;
             border-radius: var(--tile-radius, 12px); background: transparent; overflow: hidden;
-            backface-visibility: hidden; transition: transform 300ms; cursor: pointer;
+            backface-visibility: hidden; transition: transform 300ms; cursor: none;
             -webkit-tap-highlight-color: transparent; touch-action: manipulation;
             pointer-events: auto; -webkit-transform: translateZ(0); transform: translateZ(0);
         }
@@ -218,8 +178,8 @@
             transition: transform 500ms ease, opacity 500ms ease;
             transform-origin: top left; box-shadow: 0 10px 30px rgba(0,0,0,0.35);
         }
-        .viewer .enlarge img { width: 100%; height: 100%; object-fit: cover; filter: var(--image-filter, none); }
-        .sphere-root .enlarge-closing img { filter: var(--image-filter, none); }
+        .viewer .enlarge img { width: 100%; height: 100%; object-fit: cover; filter: none; }
+        .sphere-root .enlarge-closing img { filter: none; }
         .edge-fade {
             position: absolute; left: 50%; height: 70px; z-index: 5; pointer-events: none;
             width: calc(var(--radius, 400px) * 2);
@@ -279,7 +239,11 @@
                     <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[0.8] text-black">DOUGLAS<br>TA</h1>
                     <div class="flex items-center gap-2 mt-4">
                         <div class="w-12 h-[1px] bg-black"></div>
-                        <span class="mono-text text-[10px] font-bold">AI-ORIENTED SOFTWARE ENGINEER</span>
+                        <span class="mono-text text-[10px] font-bold">AI SOFTWARE ENGINEER</span>
+                    </div>
+                    <div class="flex items-center gap-2 mt-2">
+                        <div class="w-12 h-[1px] bg-black"></div>
+                        <span class="mono-text text-[10px] font-bold">ASPIRING PRODUCT MANAGER</span>
                     </div>
                 </div>
                 <div class="absolute top-10 right-10 mono-text text-[10px] text-right hidden md:block pointer-events-none z-30">
@@ -290,7 +254,7 @@
                 <div class="image-container relative h-[65vh] aspect-[4/5] bg-neutral-100 border-[16px] border-black transition-all duration-700 hover:shadow-[30px_30px_0px_rgba(0,0,0,0.1)] group z-20">
                     <div class="absolute -top-10 left-0 mono-text text-[10px] flex items-center gap-2">
                         <span class="px-2 py-0.5 bg-black text-white">ID_404</span>
-                        <span>ENTITY_HOVER</span>
+                        <span>HOVER_ME</span>
                     </div>
                     <img src="https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/5531bca8-cac6-471d-98bf-a1027e7a1683/1772633847243-9bbf028e/image_one.png"
                          class="human-image absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 grayscale" alt="Douglas Ta Portrait">
@@ -313,35 +277,35 @@
                     <h2 class="text-8xl md:text-[12rem] font-bold tracking-tighter leading-[0.8] text-black shrink-0">
                         WHO<br>AM I
                     </h2>
-                    <div class="flex-1 relative overflow-hidden" style="height:420px;">
-                        <div class="sphere-root" id="dome-root"
-                            style="--segments-x:35;--segments-y:35;--overlay-blur-color:#ffffff;--tile-radius:4px;--enlarge-radius:4px;--image-filter:grayscale(1)">
-                            <main class="sphere-main" id="dome-main">
-                                <div class="stage">
-                                    <div class="sphere" id="dome-sphere"></div>
-                                </div>
-                                <div class="overlay"></div>
-                                <div class="overlay overlay--blur"></div>
-                                <div class="edge-fade edge-fade--top"></div>
-                                <div class="edge-fade edge-fade--bottom"></div>
-                                <div class="viewer" id="dome-viewer">
-                                    <div class="scrim" id="dome-scrim"></div>
-                                    <div class="frame" id="dome-frame"></div>
-                                </div>
-                            </main>
+                    <div class="flex-1 flex flex-col">
+                        <div class="relative overflow-hidden" style="height:600px;">
+                            <div class="sphere-root" id="dome-root"
+                                style="--segments-x:26;--segments-y:26;--overlay-blur-color:#ffffff;--tile-radius:16px;--enlarge-radius:16px;--image-filter:grayscale(1)">
+                                <main class="sphere-main" id="dome-main">
+                                    <div class="stage">
+                                        <div class="sphere" id="dome-sphere"></div>
+                                    </div>
+                                    <div class="overlay"></div>
+                                    <div class="overlay overlay--blur"></div>
+                                    <div class="edge-fade edge-fade--top"></div>
+                                    <div class="edge-fade edge-fade--bottom"></div>
+                                    <div class="viewer" id="dome-viewer">
+                                        <div class="scrim" id="dome-scrim"></div>
+                                        <div class="frame" id="dome-frame"></div>
+                                    </div>
+                                </main>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="flex justify-end mt-12">
-                    <div class="w-1/2 mono-text text-sm leading-relaxed">
-                        [ CORE STATUS ]: DESIGNING AT THE INTERSECTION OF AUTONOMOUS REASONING AND SYSTEMIC DISRUPTION. HELPING TO DEFINE THE NEW POSSIBLE.
+                        <div class="mt-8 text-left mono-text text-sm leading-relaxed">
+                            [ CORE STATUS ]: DESIGNING AT THE INTERSECTION OF AUTONOMOUS REASONING AND SYSTEMIC DISRUPTION. HELPING TO DEFINE THE NEW POSSIBLE.
+                        </div>
                     </div>
                 </div>
             </section>
 
             <!-- Section: Bio & Background -->
             <section class="grid grid-cols-1 md:grid-cols-2 border-b border-black">
-                <div class="p-8 border-r border-black holographic-card">
+                <div class="p-8 border-r border-black">
                     <div class="mono-text text-[10px] mb-8">[ SYSTEM_BIO_01 ]</div>
                     <p class="text-xl font-medium leading-tight mb-6">
                         Douglas Ta is a creative force driven by the raw aesthetics of industrial landscapes and the clinical precision of modern technology.
@@ -349,9 +313,8 @@
                     <p class="text-neutral-500 leading-relaxed">
                         With a background rooted in both physical prototyping and digital interface design, Douglas bridges the gap between the tangible and the virtual. His work is characterized by a "less but better" philosophy, stripped of ornamentation to reveal the functional soul within.
                     </p>
-                    <div class="holo-glow"></div>
                 </div>
-                <div class="p-8 holographic-card">
+                <div class="p-8">
                     <div class="mono-text text-[10px] mb-8">[ BACKGROUND_JOURNEY ]</div>
                     <div class="space-y-6">
                         <div class="flex gap-4 items-start">
@@ -367,13 +330,12 @@
                             <p class="text-sm uppercase tracking-wider">Interaction Researcher // Zero-Grid Institute</p>
                         </div>
                     </div>
-                    <div class="holo-glow"></div>
                 </div>
             </section>
 
             <!-- Section: Interests & Accomplishments -->
             <section class="grid grid-cols-1 md:grid-cols-2 border-b border-black">
-                <div class="p-8 border-r border-black holographic-card">
+                <div class="p-8 border-r border-black">
                     <div class="mono-text text-[10px] mb-8">[ PASSIONS_DATA ]</div>
                     <ul class="space-y-4">
                         <li class="flex items-center gap-4 group">
@@ -393,33 +355,29 @@
                             <span class="mono-text text-sm">Speculative Future Narratives</span>
                         </li>
                     </ul>
-                    <div class="holo-glow"></div>
                 </div>
                 <div class="p-8">
                     <div class="mono-text text-[10px] mb-8">[ KEY_MILESTONES ]</div>
                     <div class="grid grid-cols-1 gap-4">
-                        <div class="p-4 brutalist-border holographic-card">
+                        <div class="p-4 brutalist-border">
                             <div class="mono-text text-[10px] opacity-40 mb-1">AWARD_01</div>
                             <div class="text-sm font-bold">DESIGN MUSEUM INTERFACE OF THE YEAR</div>
-                            <div class="holo-glow"></div>
-                        </div>
-                        <div class="p-4 brutalist-border holographic-card">
+                                </div>
+                        <div class="p-4 brutalist-border">
                             <div class="mono-text text-[10px] opacity-40 mb-1">EXHIBIT_A</div>
                             <div class="text-sm font-bold">'VOID SPACES' AT THE VENICE BIENNALE</div>
-                            <div class="holo-glow"></div>
-                        </div>
-                        <div class="p-4 brutalist-border holographic-card">
+                                </div>
+                        <div class="p-4 brutalist-border">
                             <div class="mono-text text-[10px] opacity-40 mb-1">SPEAKER_VOICE</div>
                             <div class="text-sm font-bold">CONFIG 2026: BRUTALISM IN DIGITAL PRODUCTS</div>
-                            <div class="holo-glow"></div>
-                        </div>
+                                </div>
                     </div>
                 </div>
             </section>
 
             <!-- Section: Skills & Contact -->
             <section class="grid grid-cols-1 md:grid-cols-3">
-                <div class="col-span-2 p-8 border-r border-black holographic-card">
+                <div class="col-span-2 p-8 border-r border-black">
                     <div class="mono-text text-[10px] mb-8">[ TECHNICAL_COMPETENCIES ]</div>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
                         <div>
@@ -447,7 +405,6 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="holo-glow"></div>
                 </div>
                 <div class="p-8 bg-black text-white">
                     <div class="mono-text text-[10px] mb-8 text-neutral-400">[ CONTACT_REACH ]</div>
@@ -526,7 +483,7 @@
         cursor.style.top = `${e.clientY}px`;
     });
 
-    const hoverSelectors = 'a, button, .image-container, .brutalist-border, [role="button"]';
+    const hoverSelectors = 'a:not(#dome-root a), button:not(#dome-root button), .image-container, .brutalist-border, [role="button"]:not(#dome-root [role="button"])';
     const setupHovers = () => {
         document.querySelectorAll(hoverSelectors).forEach(el => {
             el.removeEventListener('mouseenter', handleEnter);
@@ -564,21 +521,31 @@
     // ── Dome Gallery ────────────────────────────────────────────────
     (function initDomeGallery() {
         const IMAGES = [
-            { src: 'https://images.unsplash.com/photo-1755331039789-7e5680e26e8f?q=80&w=774&auto=format&fit=crop', alt: 'Abstract art' },
-            { src: 'https://images.unsplash.com/photo-1755569309049-98410b94f66d?q=80&w=772&auto=format&fit=crop', alt: 'Modern sculpture' },
-            { src: 'https://images.unsplash.com/photo-1755497595318-7e5e3523854f?q=80&w=774&auto=format&fit=crop', alt: 'Digital artwork' },
-            { src: 'https://images.unsplash.com/photo-1755353985163-c2a0fe5ac3d8?q=80&w=774&auto=format&fit=crop', alt: 'Contemporary art' },
-            { src: 'https://images.unsplash.com/photo-1745965976680-d00be7dc0377?q=80&w=774&auto=format&fit=crop', alt: 'Geometric pattern' },
-            { src: 'https://images.unsplash.com/photo-1752588975228-21f44630bb3c?q=80&w=774&auto=format&fit=crop', alt: 'Textured surface' },
-            { src: 'https://pbs.twimg.com/media/Gyla7NnXMAAXSo_?format=jpg&name=large', alt: 'Social media image' }
+            { src: 'assets/atlanta-rooftop.jpg', alt: 'Atlanta' },
+            { src: 'assets/graduation.jpg', alt: 'Graduation' },
+            { src: 'assets/NASA-astronaut.jpg', alt: 'NASA' },
+            { src: 'assets/sunset ocean.jpg', alt: 'Ocean Sunset' },
+            { src: 'assets/Raytheon-IPPD.jpg', alt: 'Raytheon IPPD' },
+            { src: 'assets/New-York-Brooklyn.jpg', alt: 'Brooklyn, New York' },
+            { src: 'assets/Japan.jpg', alt: 'Japan' },
+            { src: 'assets/Scuba-Diving.jpg', alt: 'Scuba Diving' },
+            { src: 'assets/Llamas.jpg', alt: 'Llamas' },
+            { src: 'assets/Baby Me Vietnam.jpg', alt: 'Vietnam' },
+            { src: 'assets/Flying.jpg', alt: 'Pilot' },
+            { src: 'assets/Boston.jpg', alt: 'Boston' },
+            { src: 'assets/Atlanta.jpg', alt: 'Atlanta' },
+            { src: 'assets/Jacksonville.jpg', alt: 'Jacksonville' },
+            { src: 'assets/White-Water-Rafting.jpg', alt: 'White Water Rafting' },
+            { src: 'assets/Freedom-Scientific-IPPD.jpg', alt: 'Freedom Scientific IPPD' },
+            { src: 'assets/UF-Badminton.jpg', alt: 'UF Badminton' },
         ];
-        const segments = 35;
-        const maxVerticalRotationDeg = 5;
-        const dragSensitivity = 20;
+        const segments = 26;
+        const maxVerticalRotationDeg = 4;
+        const dragSensitivity = 30;
         const enlargeTransitionMs = 300;
-        const dragDampening = 2;
-        const minRadius = 400;
-        const fit = 0.5;
+        const dragDampening = 3.4;
+        const minRadius = 500;
+        const fit = 0.9;
         const padFactor = 0.25;
         const openedImageWidth = '250px';
         const openedImageHeight = '350px';
@@ -775,6 +742,20 @@
             const oImg = document.createElement('img');
             oImg.src = parent.dataset.src || imgDiv.querySelector('img')?.src || '';
             overlay.appendChild(oImg);
+            const altText = imgDiv.querySelector('img')?.alt || imgDiv.getAttribute('aria-label') || '';
+            if (altText) {
+                const caption = document.createElement('div');
+                caption.textContent = altText;
+                Object.assign(caption.style, {
+                    position: 'absolute', bottom: '0', left: '0', right: '0',
+                    padding: '12px 16px', color: '#ffffff', fontWeight: 'bold',
+                    fontFamily: "'Azeret Mono', monospace", fontSize: '13px',
+                    letterSpacing: '0.15em', textTransform: 'uppercase',
+                    background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%)',
+                    pointerEvents: 'none'
+                });
+                overlay.appendChild(caption);
+            }
             viewerEl.appendChild(overlay);
 
             const sx0 = tileR.width  / frameR.width  || 1;
@@ -857,35 +838,19 @@
             }, { once: true });
         }
 
-        sphereEl.addEventListener('click', e => {
+        mainEl.addEventListener('click', e => {
             if (moved || performance.now() - lastDragEndAt < 80 || opening) return;
-            const imgDiv = e.target.closest('.item__image');
+            let imgDiv = e.target.closest('.item__image');
+            if (!imgDiv) {
+                const el = document.elementFromPoint(e.clientX, e.clientY);
+                if (el) imgDiv = el.closest('.item__image');
+            }
             if (imgDiv) openItem(imgDiv);
         });
         scrimEl.addEventListener('click', closeItem);
         window.addEventListener('keydown', e => { if (e.key === 'Escape') closeItem(); });
     })();
 
-    // Holographic card tilt — translated from components.md HolographicCard
-    document.querySelectorAll('.holographic-card').forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = (y - centerY) / 100;
-            const rotateY = (centerX - x) / 100;
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            card.style.setProperty('--bg-x', `${(x / rect.width) * 100}%`);
-            card.style.setProperty('--bg-y', `${(y / rect.height) * 100}%`);
-        });
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-            card.style.setProperty('--bg-x', '50%');
-            card.style.setProperty('--bg-y', '50%');
-        });
-    });
 </script>
 </body>
 </html>
